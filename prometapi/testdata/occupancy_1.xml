@@ -1,0 +1,63 @@
+<?xml version="1.0" standalone="yes"?>
+<ROOT>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>14</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>568</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>8</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>1</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>11</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>26</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>2</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>28</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>13</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>74</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>7</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>-139</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>10</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>31</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>6</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>38</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>9</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>73</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>12</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>85</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>15</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>15</P_kratkotrajniki>
+  </ZASEDENOST>
+  <ZASEDENOST>
+    <ID_ParkiriscaNC>3</ID_ParkiriscaNC>
+    <Cas>2011-05-25 14:24:00</Cas>
+    <P_kratkotrajniki>-74</P_kratkotrajniki>
+  </ZASEDENOST>
+</ROOT>

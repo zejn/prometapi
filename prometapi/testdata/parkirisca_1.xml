@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Parkirisca xmlns="http://www.tempuri.org/dsP.xsd">
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur>1</Cena_ura_Eur>
+    <ID_Parkirisca>2</ID_Parkirisca>
+    <ID_ParkiriscaNC>2</ID_ParkiriscaNC>
+    <Ime>GH Kozolec</Ime>
+    <Invalidi_St_mest>7</Invalidi_St_mest>
+    <KoordinataX>462050</KoordinataX>
+    <KoordinataY>101529</KoordinataY>
+    <Opis>dnevna tarifa od 07:00 do 19:00 - 1,00 EUR/uro&#13;
+nočna tarifa od 19.00 do 7.00 (1,5 EUR/noč)</Opis>
+    <St_mest>248</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik></U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno>24 ur</U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest>2</A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>3</ID_Parkirisca>
+    <ID_ParkiriscaNC>3</ID_ParkiriscaNC>
+    <Ime>Tivoli I</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>461615</KoordinataX>
+    <KoordinataY>101628</KoordinataY>
+    <Opis>Prvi dve uri 0,50 EUR, vsaka nadaljna ura 0,5 EUR</Opis>
+    <St_mest>360</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik>od 6.00 do 20.00</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>4</ID_Parkirisca>
+    <ID_ParkiriscaNC>12</ID_ParkiriscaNC>
+    <Ime>Kranjčeva</Ime>
+    <Invalidi_St_mest>2</Invalidi_St_mest>
+    <KoordinataX>463379</KoordinataX>
+    <KoordinataY>103001</KoordinataY>
+    <Opis>dnevna tarifa od 7.ure do 19.ure -  prvi dve uri: 0,50€/ vsaka naslednja ura:0,50€&#13;
+nočna tarifa od 19.ure do 7.ure - 1,50€/noč</Opis>
+    <St_mest>118</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik>24 ur</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>6</ID_Parkirisca>
+    <ID_ParkiriscaNC>6</ID_ParkiriscaNC>
+    <Ime>Mirje</Ime>
+    <Invalidi_St_mest>2</Invalidi_St_mest>
+    <KoordinataX>461281</KoordinataX>
+    <KoordinataY>100410</KoordinataY>
+    <Opis>od 7.ure do 19.ure - 0,60€/uro&#13;
+od 19.ure do 7.ure - 1,50€/noč</Opis>
+    <St_mest>108</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik></U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno>24 ur</U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>7</ID_Parkirisca>
+    <ID_ParkiriscaNC>7</ID_ParkiriscaNC>
+    <Ime>KC Vrazov trg</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>463044</KoordinataX>
+    <KoordinataY>100848</KoordinataY>
+    <Opis>od 7.ure do 19.ure - 0,60€/uro&#13;
+od 19.ure do 7.ure - 1,50€/noč</Opis>
+    <St_mest>47</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik></U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno>24 ur</U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>8</ID_Parkirisca>
+    <ID_ParkiriscaNC>8</ID_ParkiriscaNC>
+    <Ime>Trg MDB</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>461339</KoordinataX>
+    <KoordinataY>100426</KoordinataY>
+    <Opis>dnevna tarifa od 07:00 do 19:00 ure: prvi dve uri 0,50 EUR, vsaka nadaljna ura 0,5 EUR&#13;
+&#13;
+nočna tarifa od 19:00 do 07:00 ure: 1,50 EUR / noč</Opis>
+    <St_mest>38</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik>24 ur</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>9</ID_Parkirisca>
+    <ID_ParkiriscaNC>9</ID_ParkiriscaNC>
+    <Ime>Gospodarsko raz.</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>462514</KoordinataX>
+    <KoordinataY>102064</KoordinataY>
+    <Opis>V času sejma na GR : 1 EUR / 1 ura</Opis>
+    <St_mest>550</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik></U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno>24 ur</U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>10</ID_Parkirisca>
+    <ID_ParkiriscaNC>10</ID_ParkiriscaNC>
+    <Ime>Bežigrad</Ime>
+    <Invalidi_St_mest>2</Invalidi_St_mest>
+    <KoordinataX>462323</KoordinataX>
+    <KoordinataY>102140</KoordinataY>
+    <Opis>od 7.ure do 19.ure - 0,60€/uro&#13;
+od 19.ure do 7.ure - 1,50€/noč</Opis>
+    <St_mest>62</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik></U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno>24 ur</U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>11</ID_Parkirisca>
+    <ID_ParkiriscaNC>11</ID_ParkiriscaNC>
+    <Ime>Trg preko. brigad  </Ime>
+    <Invalidi_St_mest>4</Invalidi_St_mest>
+    <KoordinataX>460893</KoordinataX>
+    <KoordinataY>102857</KoordinataY>
+    <Opis>dnevna tarifa od 7.ure do 19.ure -  prvi dve uri: 0,50€/ vsaka naslednja ura:0,50€&#13;
+nočna tarifa od 19.ure do 7.ure - 1,50€/noč</Opis>
+    <St_mest>98</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik></U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno>24 ur</U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur>1</Cena_ura_Eur>
+    <ID_Parkirisca>12</ID_Parkirisca>
+    <ID_ParkiriscaNC>5</ID_ParkiriscaNC>
+    <Ime>Sanatorij Emona</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>462352</KoordinataX>
+    <KoordinataY>101161</KoordinataY>
+    <Opis></Opis>
+    <St_mest>35</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik>od 6:00 do 20:00 ure</U_delovnik>
+    <U_sobota>od 7:00 do 15:00 ure</U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur>1</Cena_ura_Eur>
+    <ID_Parkirisca>14</ID_Parkirisca>
+    <ID_ParkiriscaNC>15</ID_ParkiriscaNC>
+    <Ime>Petkovskovo  II</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>462511</KoordinataX>
+    <KoordinataY>101003</KoordinataY>
+    <Opis></Opis>
+    <St_mest>111</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik>od 6:00 do 20:00 ure</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur>1</Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>17</ID_Parkirisca>
+    <ID_ParkiriscaNC>17</ID_ParkiriscaNC>
+    <Ime>Dolgi most</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>458813</KoordinataX>
+    <KoordinataY>99288</KoordinataY>
+    <Opis></Opis>
+    <St_mest>217</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik> od 6:00 - 20:00 ure</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur>0.6</Cena_ura_Eur>
+    <ID_Parkirisca>18</ID_Parkirisca>
+    <ID_ParkiriscaNC>18</ID_ParkiriscaNC>
+    <Ime>Parkomati</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX></KoordinataX>
+    <KoordinataY></KoordinataY>
+    <Opis></Opis>
+    <St_mest>2164</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik>od 8:00 do 18:00 ure</U_delovnik>
+    <U_sobota>od 8:00 do 13:00 ure</U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>19</ID_Parkirisca>
+    <ID_ParkiriscaNC>19</ID_ParkiriscaNC>
+    <Ime>Tobačna</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>461185</KoordinataX>
+    <KoordinataY>100714</KoordinataY>
+    <Opis>Prvi dve uri 0,50 EUR, vsaka nadaljna ura 0,5 EUR</Opis>
+    <St_mest>47</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik>od 6:00 do 20:00 ure</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>21</ID_Parkirisca>
+    <ID_ParkiriscaNC>21</ID_ParkiriscaNC>
+    <Ime>Tivoli II</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>461463</KoordinataX>
+    <KoordinataY>101902</KoordinataY>
+    <Opis>Prvi dve uri 0,50 EUR, vsaka nadaljna ura 0,5 EUR</Opis>
+    <St_mest>90</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik>od 6.00 do 20.00 ure</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>22</ID_Parkirisca>
+    <ID_ParkiriscaNC>13</ID_ParkiriscaNC>
+    <Ime>Žale II</Ime>
+    <Invalidi_St_mest></Invalidi_St_mest>
+    <KoordinataX>463890</KoordinataX>
+    <KoordinataY>102647</KoordinataY>
+    <Opis>0,50  EUR prvi dve uri, 0,50 EUR vsaka naslednja ura</Opis>
+    <St_mest>80</St_mest>
+    <Tip_parkirisca>Avtomatizirano</Tip_parkirisca>
+    <U_delovnik>7.00 - 17.00 ure</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>23</ID_Parkirisca>
+    <ID_ParkiriscaNC>23</ID_ParkiriscaNC>
+    <Ime>Žale I</Ime>
+    <Invalidi_St_mest>2</Invalidi_St_mest>
+    <KoordinataX>463908</KoordinataX>
+    <KoordinataY>102873</KoordinataY>
+    <Opis>0,50  EUR prvi dve uri, 0,50 EUR vsaka naslednja ura</Opis>
+    <St_mest>137</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik>7.00 - 17.00 ure</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec></Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur>1</Cena_ura_Eur>
+    <ID_Parkirisca>24</ID_Parkirisca>
+    <ID_ParkiriscaNC>24</ID_ParkiriscaNC>
+    <Ime>NUK</Ime>
+    <Invalidi_St_mest>2</Invalidi_St_mest>
+    <KoordinataX>461827</KoordinataX>
+    <KoordinataY>100390</KoordinataY>
+    <Opis></Opis>
+    <St_mest>188</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik></U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno>od 6.00 do 22.00</U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>25</ID_Parkirisca>
+    <ID_ParkiriscaNC>25</ID_ParkiriscaNC>
+    <Ime>Žale III</Ime>
+    <Invalidi_St_mest>4</Invalidi_St_mest>
+    <KoordinataX>463691</KoordinataX>
+    <KoordinataY>102777</KoordinataY>
+    <Opis>0,50  EUR prvi dve uri, 0,50 EUR vsaka naslednja ura</Opis>
+    <St_mest>77</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik>od 07.00 - 17.00 ure</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>26</ID_Parkirisca>
+    <ID_ParkiriscaNC>22</ID_ParkiriscaNC>
+    <Ime>Center Stožice</Ime>
+    <Invalidi_St_mest>60</Invalidi_St_mest>
+    <KoordinataX>463455</KoordinataX>
+    <KoordinataY>104206</KoordinataY>
+    <Opis>P+R - od ponedeljka do petka (06.00 do 20.00 ure)&#13;
+ostali uporabniki: vse dni v tednu (24 ur)</Opis>
+    <St_mest>1220</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik></U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+  <Parkirisca>
+    <A_St_Mest></A_St_Mest>
+    <Cena_dan_Eur></Cena_dan_Eur>
+    <Cena_mesecna_Eur></Cena_mesecna_Eur>
+    <Cena_splosno></Cena_splosno>
+    <Cena_ura_Eur></Cena_ura_Eur>
+    <ID_Parkirisca>27</ID_Parkirisca>
+    <ID_ParkiriscaNC>26</ID_ParkiriscaNC>
+    <Ime>Žale IV</Ime>
+    <Invalidi_St_mest>2</Invalidi_St_mest>
+    <KoordinataX>463815</KoordinataX>
+    <KoordinataY>102749</KoordinataY>
+    <Opis>za prvi dve uri: 0,50 € / vsaka naslednja ura 0,50 € </Opis>
+    <St_mest>62</St_mest>
+    <Tip_parkirisca>Neavtomatizirano</Tip_parkirisca>
+    <U_delovnik>od 07.00 - 17.00 ure</U_delovnik>
+    <U_sobota></U_sobota>
+    <U_splosno></U_splosno>
+    <Upravljalec>JP LPT d.o.o.</Upravljalec>
+  </Parkirisca>
+</Parkirisca>
