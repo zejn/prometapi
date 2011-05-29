@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^promet/', 'django.views.generic.simple.redirect_to', {'url': 'https://github.com/zejn/prometapi/blob/master/README.rst'}),
+    url(r'^promet/$', 'django.views.generic.simple.redirect_to', {'url': 'https://github.com/zejn/prometapi/blob/master/README.rst'}),
     url(r'^promet/events/', 'prometapi.views.events'),
     url(r'^promet/burja/', 'prometapi.views.burja'),
     url(r'^promet/burjaznaki/', 'prometapi.views.burjaznaki'),
