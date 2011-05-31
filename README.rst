@@ -33,6 +33,9 @@ Vsak klic v primeru napake vrne odgovor::
 Podatki
 =======
 
+Podatki so trenutno na voljo na www.kiberpipa.org. Hostname se lahko v
+prihodnje spremeni.
+
 Dogodki na cestah
 -----------------
 
