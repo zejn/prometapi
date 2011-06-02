@@ -20,4 +20,5 @@ urlpatterns = patterns('',
     url(r'^promet/burjaznaki/', 'prometapi.views.burjaznaki'),
     url(r'^promet/counters/', 'prometapi.views.counters'),
     url(r'^promet/parkirisca/lpt/', 'prometapi.views.parkirisca_lpt'),
+    url(r'^promet/bicikelj/list/', 'prometapi.views.bicikelj'),
 )

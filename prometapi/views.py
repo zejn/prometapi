@@ -1,6 +1,7 @@
 
 from django.http import HttpResponse
 from prometapi.models import Events, Burja, BurjaZnaki, Counters, ParkiriscaLPT
+from prometapi.bicikeljproxy.models import BicikeljData
 
 
 class List:
@@ -17,4 +18,5 @@ burja = List(Burja)
 burjaznaki = List(BurjaZnaki)
 counters = List(Counters)
 parkirisca_lpt = List(ParkiriscaLPT)
+bicikelj = List(BicikeljData)
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<carto>
+  <markers>
+    <marker name="PREŠERNOV TRG-PETKOVŠKOVO NABREŽJE" number="1" address="Prešernov trg 6" fullAddress="Prešernov trg 6  " lat="46.051367" lng="14.506542" open="1" bonus="0"/>
+    <marker name="POGAČARJEV TRG-TRŽNICA" number="2" address="Pogačarjev trg 3" fullAddress="Pogačarjev trg 3  " lat="46.051093" lng="14.507186" open="1" bonus="0"/>
+    <marker name="KONGRESNI TRG-ŠUBIČEVA ULICA" number="3" address="Kongresni trg 3" fullAddress="Kongresni trg 3  " lat="46.050388" lng="14.504623" open="1" bonus="0"/>
+    <marker name="CANKARJEVA UL.-NAMA" number="4" address="Cankarjeva cesta 1" fullAddress="Cankarjeva cesta 1  " lat="46.052431" lng="14.503257" open="1" bonus="0"/>
+    <marker name="BREG" number="5" address="Breg 20" fullAddress="Breg 20  " lat="46.046498" lng="14.505148" open="1" bonus="0"/>
+    <marker name="GRUDNOVO NABREŽJE-KARLOVŠKA C." number="6" address="Grudnovo nabrežje 3" fullAddress="Grudnovo nabrežje 3  " lat="46.045748" lng="14.506196" open="1" bonus="0"/>
+    <marker name="MIKLOŠIČEVA- PARK" number="7" address="Miklošičeva cesta 20" fullAddress="Miklošičeva cesta 20  " lat="46.054168" lng="14.50706" open="1" bonus="0"/>
+    <marker name="BAVARSKI DVOR" number="8" address="Slovenska cesta 55c" fullAddress="Slovenska cesta 55c  " lat="46.05682" lng="14.50551" open="1" bonus="0"/>
+    <marker name="TRG OF-KOLODVORSKA UL." number="9" address="Trg OF 12" fullAddress="Trg OF 12  " lat="46.057421" lng="14.510265" open="1" bonus="0"/>
+    <marker name="MASSARYKOVA DDC" number="10" address="Massarykova cesta 14" fullAddress="Massarykova cesta 14  " lat="46.05763" lng="14.514264" open="1" bonus="0"/>
+    <marker name="VILHARJEVA CESTA" number="11" address="Vilharjeva cesta 23" fullAddress="Vilharjeva cesta 23  " lat="46.06005" lng="14.51302" open="1" bonus="0"/>
+    <marker name="PARK NAVJE-ŽELEZNA CESTA" number="12" address="Železna cesta 18" fullAddress="Železna cesta 18  " lat="46.06361" lng="14.51315" open="1" bonus="0"/>
+    <marker name="TRG MDB" number="13" address="Trg MDB 9" fullAddress="Trg MDB 9  " lat="46.047565" lng="14.495687" open="1" bonus="0"/>
+    <marker name="PARKIRIŠČE NUK 2-FF" number="14" address="Zoisova cesta 2" fullAddress="Zoisova cesta 2  " lat="46.046377" lng="14.501256" open="1" bonus="0"/>
+    <marker name="AMBROŽEV TRG" number="15" address="Poljanska cesta 20c" fullAddress="Poljanska cesta 20c  " lat="46.049877" lng="14.516308" open="1" bonus="0"/>
+    <marker name="GH ŠENTPETER-NJEGOŠEVA C." number="16" address="Zaloška cesta 1" fullAddress="Zaloška cesta 1  " lat="46.05257" lng="14.51928" open="1" bonus="0"/>
+    <marker name="ILIRSKA ULICA" number="17" address="Ilirska ulica 1" fullAddress="Ilirska ulica 1  " lat="46.053144" lng="14.513479" open="1" bonus="0"/>
+    <marker name="TRŽAŠKA C.-ILIRIJA" number="18" address="Tržaška cesta 37" fullAddress="Tržaška cesta 37  " lat="46.044629" lng="14.486699" open="1" bonus="0"/>
+    <marker name="TIVOLI" number="19" address="Celovška cesta 26" fullAddress="Celovška cesta 26  " lat="46.05952" lng="14.4982" open="1" bonus="0"/>
+    <marker name="STARA CERKEV" number="20" address="Celovška cesta 69" fullAddress="Celovška cesta 69  " lat="46.06342" lng="14.494588" open="1" bonus="0"/>
+    <marker name="KINO ŠIŠKA" number="21" address="Celovška cesta 111c" fullAddress="Celovška cesta 111c  " lat="46.06928" lng="14.48971" open="1" bonus="0"/>
+    <marker name="ŠPICA" number="22" address="Prule 8" fullAddress="Prule 8  " lat="46.040213" lng="14.512044" open="1" bonus="0"/>
+    <marker name="BARJANSKA C.-CENTER STAREJŠIH TRNOVO" number="23" address="Devinska ulica 1a" fullAddress="Devinska ulica 1a  " lat="46.04081" lng="14.49951" open="1" bonus="0"/>
+    <marker name="ZALOŠKA C.-GRABLOVIČEVA C." number="24" address="Zaloška cesta 16" fullAddress="Zaloška cesta 16  " lat="46.05441" lng="14.52978" open="1" bonus="0"/>
+    <marker name="TRŽNICA MOSTE" number="25" address="Zaloška cesta 54" fullAddress="Zaloška cesta 54  " lat="46.055801" lng="14.534156" open="1" bonus="0"/>
+    <marker name="ROŽNA DOLINA-ŠKRABČEVA UL." number="26" address="Škrabčeva ulica 2" fullAddress="Škrabčeva ulica 2  " lat="46.051439" lng="14.49273" open="1" bonus="0"/>
+    <marker name="DUNAJSKA C.-PS PETROL" number="27" address="Dunajska cesta 50" fullAddress="Dunajska cesta 50  " lat="46.065136" lng="14.509112" open="1" bonus="0"/>
+    <marker name="PLEČNIKOV STADION" number="28" address="Dunajska cesta 70" fullAddress="Dunajska cesta 70  " lat="46.06942" lng="14.51052" open="1" bonus="0"/>
+    <marker name="DUNAJSKA C.-PS MERCATOR" number="29" address="Dunajska cesta 105" fullAddress="Dunajska cesta 105  " lat="46.074193" lng="14.511134" open="1" bonus="0"/>
+    <marker name="VOJKOVA C.-BARAGOVA C." number="30" address="Vojkova cesta 73" fullAddress="Vojkova cesta 73  " lat="0.0" lng="0.0" open="1" bonus="0"/>
+  </markers>
+  <arrondissements>
+    <arrondissement number="0" minLat="0.0" minLng="0.0" maxLat="46.074193" maxLng="14.534156"/>
+  </arrondissements>
+</carto>
