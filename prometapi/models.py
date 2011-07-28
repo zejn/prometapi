@@ -1,6 +1,7 @@
 # *-* coding: utf-8 *-*
 import datetime
 import re
+import os
 import simplejson
 import time
 import urllib2
@@ -8,6 +9,9 @@ import lxml.etree
 
 from django.db import models
 from django.contrib.gis.geos import GEOSGeometry
+from django.utils._os import safe_join
+from django.conf import settings
+
 
 from prometapi.decoder import dstr
 from prometapi.geoprocessing import get_coordtransform
@@ -40,6 +44,46 @@ def _decode(s):
 	if not isinstance(s, unicode):
 		s = s.decode('utf-8')
 	return dstr(s)
+
+def datetime_encoder(obj):
+	if isinstance(obj, datetime.datetime):
+		return obj.isoformat()
+	else:
+		raise TypeError, 'Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj))
+
+def dump_data(model, day):
+	prevday = day
+	yday = prevday + timedelta(1)
+	
+	qs = model.objects.filter(
+		timestamp__gte=datetime.datetime(prevday.year, prevday.month, prevday.day, 0, 0, 0),
+		timestamp__lt=datetime.datetime(yday.year, yday.month, yday.day, 0, 0, 0))
+    
+	data = []
+	
+	for e in qs:
+		e_data = {
+			'id': e.id,
+			'timestamp': e.timestamp,
+			'json_data': e.json_data,
+			'original_data': e.original_data,
+			}
+		data.append(e_data)
+	
+	dump_dir = safe_join(settings.DUMP_DIR, yday.strftime('%Y-%m'))
+	dump_file = safe_join(dump_dir, yday.strftime(model.__class__.__name__ + '_%Y-%m-%d.json'))
+	
+	if not os.path.isdir(dump_dir):
+		os.makedirs(dump_dir)
+	
+	f = open(dump_file, 'w')
+	simplejson.dump(data, f, default=datetime_encoder)
+	f.close()
+	
+	os.system('/usr/bin/gzip -9 %s' % dump_file)
+	
+	qs.delete()
+
 
 ################################
 # Models
