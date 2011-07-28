@@ -58,6 +58,9 @@ def dump_data(model, day):
 	
 	qs = model.objects.filter(timestamp__gte=the_day, timestamp__lt=the_day + datetime.timedelta(1))
 	
+	if qs.count() == 0:
+		return
+	
 	data = []
 	
 	for obj in qs:
