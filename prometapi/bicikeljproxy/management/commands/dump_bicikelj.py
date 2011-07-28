@@ -2,7 +2,8 @@ from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
 	def handle(self, *args, **options):
-		from prometapi.models import dump_data, Burja
+		from prometapi.models import dump_data
+		from prometapi.bicikeljproxy.models import BicikeljData
 		import datetime
 		
 		if len(args):
@@ -10,4 +11,4 @@ class Command(BaseCommand):
 		else:
 			day = datetime.datetime.now() - datetime.timedelta(2)
 		
-		dump_data(model=Burja, day=day)
+		dump_data(model=BicikeljData, day=day)

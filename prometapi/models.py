@@ -53,25 +53,23 @@ def datetime_encoder(obj):
 
 def dump_data(model, day):
 	prevday = day
-	yday = prevday + timedelta(1)
+	yday = prevday + datetime.timedelta(1)
+	the_day = datetime.datetime(prevday.year, prevday.month, prevday.day, 0, 0, 0)
 	
-	qs = model.objects.filter(
-		timestamp__gte=datetime.datetime(prevday.year, prevday.month, prevday.day, 0, 0, 0),
-		timestamp__lt=datetime.datetime(yday.year, yday.month, yday.day, 0, 0, 0))
-    
+	qs = model.objects.filter(timestamp__gte=the_day, timestamp__lt=the_day + datetime.timedelta(1))
+	
 	data = []
 	
-	for e in qs:
-		e_data = {
-			'id': e.id,
-			'timestamp': e.timestamp,
-			'json_data': e.json_data,
-			'original_data': e.original_data,
-			}
-		data.append(e_data)
+	for obj in qs:
+		
+		obj_data = {}
+		for f in obj._meta.fields:
+			obj_data[f.name] = getattr(obj, f.name)
+		
+		data.append(obj_data)
 	
-	dump_dir = safe_join(settings.DUMP_DIR, yday.strftime('%Y-%m'))
-	dump_file = safe_join(dump_dir, yday.strftime(model.__class__.__name__ + '_%Y-%m-%d.json'))
+	dump_dir = safe_join(settings.DUMP_DIR, the_day.strftime('%Y-%m'))
+	dump_file = safe_join(dump_dir, the_day.strftime(model.__name__ + '_%Y-%m-%d.json'))
 	
 	if not os.path.isdir(dump_dir):
 		os.makedirs(dump_dir)
@@ -80,7 +78,7 @@ def dump_data(model, day):
 	simplejson.dump(data, f, default=datetime_encoder)
 	f.close()
 	
-	os.system('/usr/bin/gzip -9 %s' % dump_file)
+	os.system('/bin/gzip -9 %s' % dump_file)
 	
 	qs.delete()
 

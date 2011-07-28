@@ -8,6 +8,6 @@ class Command(BaseCommand):
 		if len(args):
 			day = datetime.datetime.strptime(args[0], '%Y-%m-%d')
 		else:
-			day = datetime.datetime.now() - timedelta(2)
+			day = datetime.datetime.now() - datetime.timedelta(2)
 		
 		dump_data(model=ParkiriscaLPT, day=day)
