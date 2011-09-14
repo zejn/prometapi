@@ -5,7 +5,7 @@ import time
 import urllib2
 
 URL_CARTO = 'http://www.bicikelj.si/service/carto'
-URL_STATION = 'http://www.bicikelj.si/service/stationdetails/%s'
+URL_STATION = 'http://www.bicikelj.si/service/stationdetails/ljubljana/%s'
 
 class BicikeljData(models.Model):
 	timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
