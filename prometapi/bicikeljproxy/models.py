@@ -3,6 +3,7 @@ import lxml.etree
 import datetime
 import time
 import urllib2
+import foojson
 
 URL_CARTO = 'http://www.bicikelj.si/service/carto'
 URL_STATION = 'http://www.bicikelj.si/service/stationdetails/ljubljana/%s'
@@ -51,4 +52,34 @@ def fetch_xmls():
 		}
 	return now, resp
 
+def convert_citybikes(data):
+	citybikes = foojson.loads(data)
+	markers = {}
+	updateds = []
+	
+	for d in citybikes:
+		st_id = d['id']
+		u = datetime.datetime.strptime(d['timestamp'], '%Y-%m-%d %H:%M:%S.%f')
+		updated = int(time.mktime(u.timetuple()))
+		updateds.append(updated)
+		markers[st_id] = {
+			'name': d['name'],
+			'fullAddress': d['name'],
+			'number': st_id,
+			'station': {
+				'available': d['bikes'],
+				'free': d['free'],
+				'total': d['bikes'] + d['free']
+				},
+			'lat': '%s.%s' % (d['lat'][:2], d['lat'][2:]),
+			'lng': '%s.%s' % (d['lng'][:2], d['lng'][2:]),
+			'station_valid': True,
+			'updated': updated,
+			'timestamp': d['timestamp'],
+		}
+	resp = {
+		'markers': markers,
+		'updated': min(updateds),
+		}
+	return resp
 
