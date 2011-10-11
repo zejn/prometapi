@@ -76,6 +76,7 @@ def convert_citybikes(data):
 			'station_valid': True,
 			'updated': updated,
 			'timestamp': d['timestamp'],
+			'address': d['name'],
 		}
 	resp = {
 		'markers': markers,
