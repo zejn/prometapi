@@ -63,20 +63,24 @@ def convert_citybikes(data):
 		updated = int(time.mktime(u.timetuple()))
 		updateds.append(updated)
 		markers[st_id] = {
-			'name': d['name'],
-			'fullAddress': d['name'],
-			'number': st_id,
-			'station': {
-				'available': d['bikes'],
-				'free': d['free'],
-				'total': d['bikes'] + d['free']
+			u'name': d['name'],
+			u'fullAddress': d['name'],
+			u'address': d['name'],
+			u'number': st_id,
+			u'station': {
+				u'available': str(d['bikes']),
+				u'free': str(d['free']),
+				u'total': str(d['bikes'] + d['free']),
+				u'ticket': '0',
 				},
-			'lat': '%s.%s' % (d['lat'][:2], d['lat'][2:]),
-			'lng': '%s.%s' % (d['lng'][:2], d['lng'][2:]),
-			'station_valid': True,
+			u'lat': '%s.%s' % (d['lat'][:2], d['lat'][2:]),
+			u'lng': '%s.%s' % (d['lng'][:2], d['lng'][2:]),
+			u'station_valid': True,
 			'updated': updated,
 			'timestamp': d['timestamp'],
-			'address': d['name'],
+			u'address': d['name'],
+			u'bonus': '0',
+			u'open': '1',
 		}
 	resp = {
 		'markers': markers,
@@ -84,3 +88,19 @@ def convert_citybikes(data):
 		}
 	return resp
 
+
+"""
+
+name
+bonus
+fullAddress
+number
+station
+address
+lat
+lng
+open
+station_valid
+
+
+"""
