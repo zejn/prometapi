@@ -72,8 +72,17 @@ URL: `/promet/parkirisca/lpt/`_
 
 Vir podatkov: Javno podjetje Ljubljanska parkirišča in tržnice, d.o.o., http://www.lpt.si
 
-.. _`/promet/events/`: http://www.kiberpipa.org/promet/events/
-.. _`/promet/burja/`: http://www.kiberpipa.org/promet/burja/
-.. _`/promet/burjaznaki/`: http://www.kiberpipa.org/promet/burjaznaki/
-.. _`/promet/counters/`: http://www.kiberpipa.org/promet/counters/
-.. _`/promet/parkirisca/lpt/`: http://www.kiberpipa.org/promet/parkirisca/lpt/
+Bicikelj
+--------
+
+URL: `/promet/bicikelj/list/`_
+
+Vir podatkov: `Bicikelj.si`_
+
+.. _`/promet/events/`: http://opendata.si/promet/events/
+.. _`/promet/burja/`: http://opendata.si/promet/burja/
+.. _`/promet/burjaznaki/`: http://opendata.si/promet/burjaznaki/
+.. _`/promet/counters/`: http://opendata.si/promet/counters/
+.. _`/promet/parkirisca/lpt/`: http://opendata.si/promet/parkirisca/lpt/
+.. _`/promet/bicikelj/list/`: http://opendata.si/promet/bicikelj/list/
+.. _`Bicikelj.si`: http://www.bicikelj.si/
