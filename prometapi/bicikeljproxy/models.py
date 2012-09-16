@@ -4,6 +4,7 @@ import datetime
 import time
 import urllib2
 import foojson
+import json
 
 URL_CARTO = 'http://www.bicikelj.si/service/carto'
 URL_STATION = 'http://www.bicikelj.si/service/stationdetails/ljubljana/%s'
@@ -56,15 +57,17 @@ def fetch_xmls():
 	return now, resp
 
 def convert_citybikes(data):
-	citybikes = foojson.loads(data)
+	citybikes = json.loads(data)
 	markers = {}
 	updateds = []
 	
 	for d in citybikes:
 		st_id = d['id']
-		u = datetime.datetime.strptime(d['timestamp'], '%Y-%m-%d %H:%M:%S.%f')
+		u = datetime.datetime.strptime(d['timestamp'], '%Y-%m-%dT%H:%M:%S.%f')
 		updated = int(time.mktime(u.timetuple()))
 		updateds.append(updated)
+		lat = str(d['lat'])
+		lng = str(d['lng'])
 		markers[st_id] = {
 			u'name': d['name'],
 			u'fullAddress': d['name'],
@@ -76,8 +79,8 @@ def convert_citybikes(data):
 				u'total': str(d['bikes'] + d['free']),
 				u'ticket': '0',
 				},
-			u'lat': '%s.%s' % (d['lat'][:2], d['lat'][2:]),
-			u'lng': '%s.%s' % (d['lng'][:2], d['lng'][2:]),
+			u'lat': '%s.%s' % (lat[:2], lat[2:]),
+			u'lng': '%s.%s' % (lng[:2], lng[2:]),
 			u'station_valid': True,
 			'updated': updated,
 			'timestamp': d['timestamp'],
