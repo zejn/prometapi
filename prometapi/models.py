@@ -21,6 +21,35 @@ URL_PROMET_EVENTS = 'http://promet.si/rwproxy/RWProxy.ashx?method=get&remoteUrl=
 URL_PROMET_BURJA = 'http://promet.si/rwproxy/RWProxy.ashx?method=GET&rproxytype=json&remoteUrl=http%3A//promet/burja'
 URL_PROMET_BURJAZNAKI = 'http://promet.si/rwproxy/RWProxy.ashx?method=GET&rproxytype=json&remoteUrl=http%3A//promet/burjaznaki'
 URL_PROMET_COUNTERS = 'http://promet.si/rwproxy/RWProxy.ashx?method=get&remoteUrl=http%3A//promet/counters_si&rproxytype=json'
+
+# prikljucki
+# http://promet.si/rwproxy/RWProxy.ashx?method=GET&remoteUrl=http%3A//gis.dars.si/Realis.RMap/Realis.RMap.Content/dars/locations/ce_prpn_json.txt%3F_dc%3D1319314148590%26node%3Dynode-190
+# razcepi
+# http://promet.si/rwproxy/RWProxy.ashx?method=GET&remoteUrl=http%3A//gis.dars.si/Realis.RMap/Realis.RMap.Content/dars/locations/ce_rapn_json.txt%3F_dc%3D1319314157862%26node%3Dynode-191
+# cestninske postaje
+# http://promet.si/rwproxy/RWProxy.ashx?method=GET&remoteUrl=http%3A//gis.dars.si/Realis.RMap/Realis.RMap.Content/dars/locations/ce_cppn_json.txt%3F_dc%3D1319314182798%26node%3Dynode-191
+# mejni prehodi
+# http://promet.si/rwproxy/RWProxy.ashx?method=GET&remoteUrl=http%3A//gis.dars.si/Realis.RMap/Realis.RMap.Content/dars/locations/ce_mppn_json.txt%3F_dc%3D1319314003894%26node%3Dynode-193
+# predori
+# http://promet.si/rwproxy/RWProxy.ashx?method=GET&remoteUrl=http%3A//gis.dars.si/Realis.RMap/Realis.RMap.Content/dars/locations/ce_tupn_json.txt%3F_dc%3D1319314043278%26node%3Dynode-194
+# pocivalisca
+# http://promet.si/rwproxy/RWProxy.ashx?method=GET&remoteUrl=http%3A//gis.dars.si/Realis.RMap/Realis.RMap.Content/dars/locations/ce_popn_json.txt%3F_dc%3D1319314073348%26node%3Dynode-195
+
+def get_lokacije_url(what):
+	info_dict = {
+		'prikljucki':	('ce_prpn_json.txt', 'ynode-189'),
+		'razcepi':		('ce_rapn_json.txt', 'ynode-190'),
+		'cestninske':	('ce_cppn_json.txt', 'ynode-192'),
+		'mejni_prehodi':('ce_mppn_json.txt', 'ynode-193'),
+		'predori':		('ce_tupn_json.txt', 'ynode-194'),
+		'pocivalisca':	('ce_popn_json.txt', 'ynode-195'),
+		}
+	
+	lokacija, node = info_dict[what]
+	
+	return 'http://promet.si/rwproxy/RWProxy.ashx?method=GET&remoteUrl=http%3A//gis.dars.si/Realis.RMap/Realis.RMap.Content/dars/locations/' + lokacija + '%3F_dc%3D' + str(int(time.time()*1000)) + '%26node%3D' + node
+
+
 COPYRIGHT_LPT = u'Ljubljanska parkirišča in tržnice, d.o.o.'
 URL_LPT_PARKIRISCA = 'http://www.lpt.si/uploads/xml/map/parkirisca.xml'
 URL_LPT_OCCUPANCY = 'http://www.lpt.si/uploads/xml/traffic/occupancy.xml'
@@ -110,6 +139,16 @@ class Counters(models.Model):
 	original_data = models.TextField()
 
 class ParkiriscaLPT(models.Model):
+	timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+	json_data = models.TextField(null=True, blank=True)
+	original_data = models.TextField()
+
+class Prikljucki(models.Model):
+	timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+	json_data = models.TextField(null=True, blank=True)
+	original_data = models.TextField()
+
+class Razcepi(models.Model):
 	timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
 	json_data = models.TextField(null=True, blank=True)
 	original_data = models.TextField()
@@ -263,5 +302,51 @@ def parse_parkirisca_lpt(parkirisca_data, occupancy_data):
 	json['updated'] = time.time()
 	json['copyright'] = COPYRIGHT_LPT
 	return json
+
+def _transform_dataset(original_data):
+	data = _loads(original_data)
+	geotransform = get_coordtransform()
+	for pr in data:
+		si_point = GEOSGeometry('SRID=3787;POINT (%s %s)' % (pr['x'], pr['y']))
+		si_point.transform(geotransform)
+		pr['x_wgs'] = si_point.x
+		pr['y_wgs'] = si_point.y
+	
+	return data
+
+def fetch_prikljucki():
+	url = get_lokacije_url('prikljucki')
+	original_data = urllib2.urlopen(url).read()
+	
+	json = {
+		'updated': time.time(),
+		'copyright': COPYRIGHT_PROMET,
+		'prikljucki': _transform_dataset(original_data),
+		}
+	return original_data, json
+
+def fetch_razcepi():
+	url = get_lokacije_url('razcepi')
+	original_data = urllib2.urlopen(url).read()
+	
+	json = {
+		'updated': time.time(),
+		'copyright': COPYRIGHT_PROMET,
+		'razcepi': _transform_dataset(original_data),
+		}
+	return original_data, json
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 
