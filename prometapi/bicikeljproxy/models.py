@@ -33,7 +33,7 @@ def _parse_station_xml(data):
 	sta_dict = {}
 	for elem in sta_xml.xpath('//station/*'):
 		sta_dict[elem.tag] = elem.text
-	assert list(sorted(sta_dict.keys())) == ['available', 'connected', 'free', 'open', 'ticket', 'total', 'updated'], 'Missing or added keys in station XML!?'
+	assert list(sorted(sta_dict.keys())) == ['available', 'free', 'open', 'ticket', 'total', 'updated'], 'Missing or added keys in station XML!?'
 	# backwards compatibility
 	del sta_dict['open']
 	del sta_dict['updated']
