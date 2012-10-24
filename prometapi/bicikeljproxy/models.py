@@ -2,6 +2,7 @@ from django.db import models
 import lxml.etree
 import datetime
 import time
+import sys
 import urllib2
 import foojson
 import json
@@ -33,8 +34,9 @@ def _parse_station_xml(data):
 	sta_dict = {}
 	for elem in sta_xml.xpath('//station/*'):
 		sta_dict[elem.tag] = elem.text
-	assert list(sorted(sta_dict.keys())) == ['available', 'free', 'open', 'ticket', 'total', 'updated'], 'Missing or added keys in station XML!?'
+	assert list(sorted(sta_dict.keys())) == ['available', 'connected', 'free', 'open', 'ticket', 'total', 'updated'], 'Missing or added keys in station XML!?'
 	# backwards compatibility
+	del sta_dict['connected']
 	del sta_dict['open']
 	del sta_dict['updated']
 	return sta_dict
@@ -57,7 +59,12 @@ def fetch_xmls():
 	return now, resp
 
 def convert_citybikes(data):
-	citybikes = json.loads(data)
+	try:
+		citybikes = json.loads(data)
+	except ValueError, e:
+		print >> sys.stderr, [data]
+		raise
+		
 	markers = {}
 	updateds = []
 	
