@@ -13,7 +13,10 @@ class Command(BaseCommand):
 		import urllib
 		
 		#timestamp, data = fetch_xmls()
+		print 'fetch', 'http://api.citybik.es/bicikelj.json'
 		foreign_data = urllib.urlopen('http://api.citybik.es/bicikelj.json').read()
+		
+		print [foreign_data]
 		
 		data = convert_citybikes(foreign_data)
 		timestamp = datetime.datetime.now()
