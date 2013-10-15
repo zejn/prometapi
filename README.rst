@@ -6,7 +6,7 @@ API za prometne podatke v Sloveniji
 Namen
 =====
 
-Namen te storitve je ponuditi v nadalnjo rabo podatke o prometnem stanju v
+Namen te storitve je ponuditi v nadaljnjo rabo podatke o prometnem stanju v
 Sloveniji. Storitev je s strani Kiberpipe brezplačna, potrebno pa je
 spoštovati avtorsko pravico in navesti vire podatkov, ki jih uporabljate.
 
@@ -14,7 +14,7 @@ Format zapisa
 =============
 
 Vsi podatki so na voljo v JSON zapisu. Vsak odgovor ima poleg izvirnih
-podatkov, še nekaj dodatnih podatkov:
+podatkov še nekaj dodatnih podatkov:
 
 copyright
   string, vsebuje naziv nosilca avtorske pravice nad podatki.
