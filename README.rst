@@ -14,7 +14,7 @@ Format zapisa
 =============
 
 Vsi podatki so na voljo v JSON zapisu. Vsak odgovor ima poleg izvirnih
-podatkov, še nekaj dodatnih podatkov:
+podatkov še nekaj dodatnih podatkov:
 
 copyright
   string, vsebuje naziv nosilca avtorske pravice nad podatki.
