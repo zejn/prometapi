@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'prometapi',
     'prometapi.bicikeljproxy',
+    'prometapi.sos112',
 )
 
 # A sample logging configuration. The only tangible logging
