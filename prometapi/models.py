@@ -4,6 +4,7 @@ import re
 import os
 import simplejson
 import time
+import urllib
 import urllib2
 import lxml.etree
 
@@ -174,7 +175,10 @@ class Razcepi(models.Model):
 # functions
 
 def fetch(url, postdata=None):
-	u = urllib2.urlopen(url, postdata)
+	data = None
+	if postdata is not None:
+		data = urllib.urlquote(postdata)
+	u = urllib2.urlopen(url, data)
 	obfuscated_data = u.read()
 	return obfuscated_data
 
