@@ -70,7 +70,7 @@ def convert_citybikes(data):
 	
 	for d in citybikes:
 		st_id = d['id']
-		u = datetime.datetime.strptime(d['timestamp'], '%Y-%m-%dT%H:%M:%S.%f')
+		u = datetime.datetime.strptime(d['timestamp'].rstrip('Z'), '%Y-%m-%dT%H:%M:%S.%f')
 		updated = int(time.mktime(u.timetuple()))
 		updateds.append(updated)
 		lat = str(d['lat'])
