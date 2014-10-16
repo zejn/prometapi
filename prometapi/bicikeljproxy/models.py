@@ -69,7 +69,7 @@ def convert_citybikes(data):
 	updateds = []
 	
 	for d in citybikes:
-		st_id = d['id']
+		st_id = d['number']
 		u = datetime.datetime.strptime(d['timestamp'].rstrip('Z'), '%Y-%m-%dT%H:%M:%S.%f')
 		updated = int(time.mktime(u.timetuple()))
 		updateds.append(updated)
