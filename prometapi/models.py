@@ -177,7 +177,7 @@ class Razcepi(models.Model):
 def fetch(url, postdata=None):
 	data = None
 	if postdata is not None:
-		data = urllib.urlquote(postdata)
+		data = urllib.urlencode(postdata)
 	u = urllib2.urlopen(url, data)
 	obfuscated_data = u.read()
 	return obfuscated_data
