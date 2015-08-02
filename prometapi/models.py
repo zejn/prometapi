@@ -14,7 +14,6 @@ from django.utils._os import safe_join
 from django.conf import settings
 
 
-from prometapi.decoder import dstr
 from prometapi.geoprocessing import get_coordtransform
 
 COPYRIGHT_PROMET = u'Prometno-informacijski center za državne ceste'
@@ -69,11 +68,41 @@ def _datetime2timestamp(s):
 	dt = datetime.datetime(*s)
 	return int(time.mktime(dt.timetuple()))
 
+def deobfuscate(s):
+    """
+    The encoding consists of reordering and translating.
+
+    Reordering:
+
+    Step 1: take evenly positioned characters, this is the first part of result
+    Step 2: take oddly positioned characters
+    Step 3: reverse oddly positioned characters
+    Step 4: add them to the string from step 1
+
+    Example:
+
+    s = '123456789'
+
+    Step 1: resultstr = '13579'
+    Step 2: oddly = '2468'
+    Step 3: oddly = '8642'
+    Step 4: resultstr = '135798642'
+
+    Translating characters is done via a self-inverse function:
+
+        f(x) = unichr((255 - ord(x)) % 65536)
+
+    """
+    assert isinstance(s, unicode), 'Parameter is not unicode.'
+    s2 = s[::2] + s[1::2][::-1]
+    return ''.join((unichr((255 - ord(c)) % 65536) for c in s2))
+
+
 def _decode(s):
 	# decode
 	if not isinstance(s, unicode):
 		s = s.decode('utf-8')
-	return dstr(s)
+	return deobfuscate(s)
 
 def datetime_encoder(obj):
 	if isinstance(obj, datetime.datetime):
