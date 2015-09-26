@@ -162,7 +162,14 @@ def dump_data(model, day, use_new=True):
 
 		os.system('/bin/gzip -9f %s' % dump_file)
 
-		qs.delete()
+		pks = [i[0] for i in qs.values_list('pk')]
+		qn = connection.quote_name
+		sql = 'DELETE FROM ' + qn(model._meta.db_table) + \
+			' WHERE ' + qn(model._meta.pk.name) + \
+			' IN (' + ', '.join(['%s' for i in pks]) + ');'
+		cur.execute(sql, pks)
+		cur.execute('COMMIT;')
+		#qs.delete()
 	else:
 		qs = model.objects.filter(timestamp__gte=the_day, timestamp__lt=the_day + datetime.timedelta(1))
 		
