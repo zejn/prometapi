@@ -7,10 +7,12 @@ import time
 import urllib
 import urllib2
 import lxml.etree
+import subprocess
 
 from django.db import models
 from django.contrib.gis.geos import GEOSGeometry
 from django.utils._os import safe_join
+from django.utils.timezone import make_aware, utc
 from django.conf import settings
 
 
@@ -140,9 +142,22 @@ def dump_data(model, day, use_new=True):
 		cur = connection.cursor()
 		copy_sql = 'COPY (' + sql + ') TO stdout WITH CSV HEADER;'
 		full_sql = cur.cursor.mogrify(copy_sql, params)
+		
+		args = ['psql']
+		if connection.settings_dict['USER']:
+			args += ["-U", connection.settings_dict['USER']]
+		if connection.settings_dict['HOST']:
+			args.extend(["-h", connection.settings_dict['HOST']])
+		if connection.settings_dict['PORT']:
+			args.extend(["-p", str(connection.settings_dict['PORT'])])
+		args += [connection.settings_dict['NAME']]
 
+		cmd = args + ["-c", full_sql]
+		
 		f = open(dump_file, 'w')
-		cur.cursor.copy_expert(full_sql, f)
+		p = subprocess.Popen(cmd, stdout=f)
+		p.wait()
+		#cur.cursor.copy_expert(full_sql, f)
 		f.close()
 
 		os.system('/bin/gzip -9f %s' % dump_file)
