@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import json
+import simplejson
 import dicttoxml
 from django.http import HttpResponse
 from prometapi.models import Events, Burja, BurjaZnaki, Counters, ParkiriscaLPT
@@ -33,11 +33,11 @@ sos112 = List(SOS112)
 def jsonresponse(func):
     def _inner(*args, **kwargs):
         request = args[0]
-        format = request.get('format', 'json')
+        format = request.GET.get('format', 'json')
         data = func(*args, **kwargs)
         if format == 'xml':
             return HttpResponse(dicttoxml.dicttoxml(data), mimetype='application/xml')
-        return HttpResponse(json.dumps(data, use_decimal=True, ensure_ascii=True), mimetype='application/json')
+        return HttpResponse(simplejson.dumps(data, use_decimal=True, ensure_ascii=True), mimetype='application/json')
     return _inner
 
 
