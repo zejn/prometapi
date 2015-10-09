@@ -37,6 +37,17 @@ def jsonresponse(func):
         data = func(*args, **kwargs)
         if format == 'xml':
             return HttpResponse(dicttoxml.dicttoxml(data), mimetype='application/xml')
+        elif format == 'csv':
+            # custom CSV format
+            rows = []
+            for k, v in data.items():
+                if isinstance(v, (list, tuple)):
+                    val = ','.join([str(i) for i in v])
+                else:
+                    val = v
+                rows.append(";".join([k, val]))
+            csv_str = "\n".join(rows)
+            return HttpResponse(csv_str.encode('utf-8'), mimetype='text/csv')
         return HttpResponse(simplejson.dumps(data, use_decimal=True, ensure_ascii=True), mimetype='application/json')
     return _inner
 
