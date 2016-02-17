@@ -1,10 +1,11 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import url
+from django.views.generic.base import RedirectView
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
     # url(r'^$', 'prometapi.views.home', name='home'),
     # url(r'^prometapi/', include('prometapi.foo.urls')),
@@ -14,7 +15,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^promet/$', 'django.views.generic.simple.redirect_to', {'url': 'https://github.com/zejn/prometapi/blob/master/README.rst'}),
+    url(r'^promet/$', RedirectView.as_view(url='https://github.com/zejn/prometapi/blob/master/README.rst')),
     url(r'^promet/events/', 'prometapi.views.events'),
     url(r'^promet/burja/', 'prometapi.views.burja'),
     url(r'^promet/burjaznaki/', 'prometapi.views.burjaznaki'),
@@ -23,4 +24,4 @@ urlpatterns = patterns('',
     url(r'^promet/bicikelj/list/', 'prometapi.views.bicikelj'),
     url(r'^promet/gk_to_wgs84/', 'prometapi.views.gk_to_wgs84'),
     url(r'^sos112/spin/', 'prometapi.views.sos112'),
-)
+]

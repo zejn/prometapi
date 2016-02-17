@@ -16,7 +16,7 @@ class List:
 
     def __call__(self, request):
         e = self.model.objects.latest('timestamp')
-        resp = HttpResponse(e.json_data, mimetype='application/json')
+        resp = HttpResponse(e.json_data, content_type='application/json')
         resp['Access-Control-Allow-Origin'] = '*'
         return resp
 
@@ -36,7 +36,7 @@ def jsonresponse(func):
         format = request.GET.get('format', 'json')
         data = func(*args, **kwargs)
         if format == 'xml':
-            return HttpResponse(dicttoxml.dicttoxml(data), mimetype='application/xml')
+            return HttpResponse(dicttoxml.dicttoxml(data), content_type='application/xml')
         elif format == 'csv':
             # custom CSV format
             rows = []
@@ -47,8 +47,8 @@ def jsonresponse(func):
                     val = v
                 rows.append(";".join([k, val]))
             csv_str = "\n".join(rows)
-            return HttpResponse(csv_str.encode('utf-8'), mimetype='text/csv')
-        return HttpResponse(simplejson.dumps(data, use_decimal=True, ensure_ascii=True), mimetype='application/json')
+            return HttpResponse(csv_str.encode('utf-8'), content_type='text/csv')
+        return HttpResponse(simplejson.dumps(data, use_decimal=True, ensure_ascii=True), content_type='application/json')
     return _inner
 
 
