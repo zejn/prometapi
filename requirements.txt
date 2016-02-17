@@ -1,0 +1,5 @@
+dicttoxml
+simplejson
+Django==1.9.2
+lxml
+psycopg2
