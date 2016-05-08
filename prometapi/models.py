@@ -20,6 +20,7 @@ from prometapi.geoprocessing import get_coordtransform
 
 COPYRIGHT_PROMET = u'Prometno-informacijski center za državne ceste'
 URL_PROMET_EVENTS = 'http://promet.si/rwproxy/RWProxy.ashx?method=get&remoteUrl=http%3A//promet/events_pp'
+URL_PROMET_CAMERAS = 'http://www.promet.si/rwproxy/RWProxy.ashx?method=GET&rproxytype=json&remoteUrl=http%3A//promet/cams_georss_si'
 URL_PROMET_BURJA = 'http://promet.si/rwproxy/RWProxy.ashx?method=GET&rproxytype=json&remoteUrl=http%3A//promet/burja'
 URL_PROMET_BURJAZNAKI = 'http://promet.si/rwproxy/RWProxy.ashx?method=GET&rproxytype=json&remoteUrl=http%3A//promet/burjaznaki'
 URL_PROMET_COUNTERS = 'http://promet.si/rwproxy/RWProxy.ashx?method=get&remoteUrl=http%3A//promet/counters_si&rproxytype=json'
@@ -71,7 +72,7 @@ def _datetime2timestamp(s):
 	return int(time.mktime(dt.timetuple()))
 
 def deobfuscate(s):
-    """
+	"""
     The encoding consists of reordering and translating.
 
     Reordering:
@@ -95,9 +96,9 @@ def deobfuscate(s):
         f(x) = unichr((255 - ord(x)) % 65536)
 
     """
-    assert isinstance(s, unicode), 'Parameter is not unicode.'
-    s2 = s[::2] + s[1::2][::-1]
-    return ''.join((unichr((255 - ord(c)) % 65536) for c in s2))
+	assert isinstance(s, unicode), 'Parameter is not unicode.'
+	s2 = s[::2] + s[1::2][::-1]
+	return ''.join((unichr((255 - ord(c)) % 65536) for c in s2))
 
 
 def _decode(s):
@@ -218,6 +219,11 @@ class Events(models.Model):
 	json_data = models.TextField(null=True, blank=True)
 	original_data = models.TextField()
 
+class Cameras(models.Model):
+	timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+	json_data = models.TextField(null=True, blank=True)
+	original_data = models.TextField()
+
 class Burja(models.Model):
 	timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
 	json_data = models.TextField(null=True, blank=True)
@@ -279,6 +285,35 @@ def parse_events(obfuscated_data):
 		d['x_wgs'] = point.x
 		d['y_wgs'] = point.y
 	
+	json['updated'] = time.time()
+	json['copyright'] = COPYRIGHT_PROMET
+	return json
+
+def fetch_cameras():
+	return fetch(URL_PROMET_CAMERAS, {})
+
+def _date_to_epoch_matcher(m):
+	date = datetime.datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), int(m.group(4)), int(m.group(5)), int(m.group(6)), int(m.group(7)))
+	epoch = datetime.datetime.utcfromtimestamp(0)
+	return str(int((date - epoch).total_seconds() * 1000))
+
+def parse_cameras(obfuscated_data):
+	decoded = _decode(obfuscated_data)
+
+	# postprocess
+	data = re.sub('new Date\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)',
+					_date_to_epoch_matcher,
+					decoded)
+	json = _loads(data[1:len(data) - 1])
+
+	# WGS coordinate parsing
+	for cam in json['feed']['entry']:
+		if "georss_point" not in cam:
+			continue
+		points = cam["georss_point"].split()
+		cam["y_wgs"] = float(points[0])
+		cam["x_wgs"] = float(points[1])
+
 	json['updated'] = time.time()
 	json['copyright'] = COPYRIGHT_PROMET
 	return json
