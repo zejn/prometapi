@@ -76,7 +76,7 @@ def gk_to_wgs84(request):
     if not (xl <= coords[0] <= xh and yl <= coords[1] <= yh):
         return {
             'status': 'fail',
-            'error': 'Coordinates out of bounds: %d <= x <= %d and %d <= y <= %d.' % (xl, xh, yl, yh)
+            'error': 'Coordinates (%s, %s) out of bounds: %d <= x <= %d and %d <= y <= %d.' % (coords[0], coords[1], xl, xh, yl, yh)
         }
 
     geotransform = get_coordtransform()
