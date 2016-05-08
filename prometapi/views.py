@@ -3,7 +3,7 @@
 import simplejson
 import dicttoxml
 from django.http import HttpResponse
-from prometapi.models import Events, Burja, BurjaZnaki, Counters, ParkiriscaLPT
+from prometapi.models import Events, Cameras, Burja, BurjaZnaki, Counters, ParkiriscaLPT
 from prometapi.bicikeljproxy.models import BicikeljData
 from prometapi.sos112.models import SOS112
 from geoprocessing import get_coordtransform
@@ -22,6 +22,7 @@ class List:
 
 
 events = List(Events)
+cameras = List(Cameras)
 burja = List(Burja)
 burjaznaki = List(BurjaZnaki)
 counters = List(Counters)
