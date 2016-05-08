@@ -72,6 +72,14 @@ URL: `/promet/parkirisca/lpt/`_
 
 Vir podatkov: Javno podjetje Ljubljanska parkirišča in tržnice, d.o.o., http://www.lpt.si
 
+Kamere
+------
+
+URL: `/promet/cameras/ <http://opendata.si/promet/cameras/>`_
+
+Vir podatkov: Direkcija RS za ceste, http://promet.si
+
+
 Bicikelj
 --------
 
