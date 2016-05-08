@@ -18,6 +18,7 @@ urlpatterns = [
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^promet/$', RedirectView.as_view(url='https://github.com/zejn/prometapi/blob/master/README.rst')),
     url(r'^promet/events/', views.events),
+    url(r'^promet/cameras/', views.cameras),
     url(r'^promet/burja/', views.burja),
     url(r'^promet/burjaznaki/', views.burjaznaki),
     url(r'^promet/counters/', views.counters),
