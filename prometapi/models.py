@@ -293,7 +293,17 @@ def fetch_cameras():
 	return fetch(URL_PROMET_CAMERAS, {})
 
 def _date_to_epoch_matcher(m):
-	date = datetime.datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), int(m.group(4)), int(m.group(5)), int(m.group(6)), int(m.group(7)))
+	"""
+	Dates are sometimes written in JSON as `new Date(2016, 6, 6, 23, 30, 59, 0)`. This grabs a regex matcher that
+	groups the numbers and outputs an epoch integer string.
+	"""
+	date = datetime.datetime(int(m.group(1)),       # Year
+							int(m.group(2)) + 1,    # Month (JS 0-indexed, PY 1-indexed)
+							int(m.group(3)),        # Day
+							int(m.group(4)),        # Hour
+							int(m.group(5)),        # Minute
+							int(m.group(6)),        # Second
+							int(m.group(7)))        # Millisecond
 	epoch = datetime.datetime.utcfromtimestamp(0)
 	return str(int((date - epoch).total_seconds() * 1000))
 
