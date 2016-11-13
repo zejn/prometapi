@@ -8,6 +8,7 @@ import urllib
 import urllib2
 import lxml.etree
 import subprocess
+from calendar import timegm
 
 from django.db import models
 from django.contrib.gis.geos import GEOSGeometry
@@ -15,8 +16,11 @@ from django.utils._os import safe_join
 from django.utils.timezone import make_aware, utc
 from django.conf import settings
 
-
+from prometapi.encoders import encrypt
 from prometapi.geoprocessing import get_coordtransform
+
+PROMET_KEY = '1234567890123456'
+URL_PROMET = 'http://promet.si/dc/agg'
 
 COPYRIGHT_PROMET = u'Prometno-informacijski center za državne ceste'
 URL_PROMET_EVENTS = 'http://promet.si/rwproxy/RWProxy.ashx?method=get&remoteUrl=http%3A//promet/events_pp'
@@ -265,6 +269,28 @@ def fetch(url, postdata=None):
     obfuscated_data = u.read()
     return obfuscated_data
 
+def fetch_promet():
+    post = {
+        u'Contents': [
+            {u'ContentName': u'dogodki'},
+            {u'ContentName': u'delo'},
+            {u'ContentName': u'kamere'},
+            {u'ContentName': u'stevci'},
+            {u'ContentName': u'burja'},
+            # {u'ContentName': u'dogodki_a'},
+        ],
+        u'Language': u'sl_SI',
+        u'Type': u'www.promet.si',
+        u'Version': u'1.0'}
+
+    d = simplejson.dumps(post, sort_keys=True)
+    encrypted = encrypt(d, PROMET_KEY)
+    data = encrypted.encode('hex').upper()
+    u = urllib2.urlopen(URL_PROMET, data)
+    obfuscated_data = u.read()
+
+    return obfuscated_data
+
 def fetch_events():
     return fetch(URL_PROMET_EVENTS, {})
 
@@ -306,6 +332,35 @@ def _date_to_epoch_matcher(m):
                              int(m.group(7)))        # Millisecond
     epoch = datetime.datetime.utcfromtimestamp(0)
     return str(int((date - epoch).total_seconds() * 1000))
+
+def parse_promet(obfuscated_data):
+    decoded = _decode(obfuscated_data)
+    json = _loads(decoded)
+
+    _transform_3787 = get_coordtransform()
+
+    def transform3787(x, y):
+        si_point = GEOSGeometry('SRID=3787;POINT (%s %s)' % (x, y))
+        si_point.transform(_transform_3787)
+        return si_point.x, si_point.y
+
+    def transform4326(x, y):
+        return x, y
+
+    transforms = {
+        u'EPSG:2170': transform3787,
+        u'EPSG:4326': transform4326,
+    }
+    for category_obj in json['Contents']:
+        for item in category_obj['Data']['Items']:
+            crsid = item.get('CrsId')
+            x, y = item.get('X'), item.get('Y')
+            item['x_wgs'], item['y_wgs'] = transforms[crsid](x, y)
+
+    now = timegm(datetime.datetime.utcnow().utctimetuple())
+    json['updated'] = now
+    json['copyright'] = COPYRIGHT_PROMET
+    return json
 
 def parse_cameras(obfuscated_data):
     decoded = _decode(obfuscated_data)
