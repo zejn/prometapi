@@ -143,6 +143,7 @@ def dump_data(model, day, use_new=True):
 
         sql, params = qs.query.get_compiler('default').as_sql()
         dump_file = safe_join(dump_dir, the_day.strftime(model.__name__.lower() + '_%Y-%m-%d.csv'))
+        dump_file_relative = os.path.join(the_day.strftime('%Y-%m'), the_day.strftime(model.__name__.lower() + '_%Y-%m-%d.csv'))
 
         cur = connection.cursor()
         copy_sql = 'COPY (' + sql + ') TO stdout WITH CSV HEADER;'
@@ -165,7 +166,13 @@ def dump_data(model, day, use_new=True):
         #cur.cursor.copy_expert(full_sql, f)
         f.close()
 
-        os.system('/bin/gzip -9f %s' % dump_file)
+        p = subprocess.Popen(['/bin/gzip', '-9f', dump_file])
+        p.wait()
+
+        f = open(safe_join(settings.DUMP_DIR, the_day.strftime('%Y-%m.sha1sums')), 'a')
+        p = subprocess.Popen(['/usr/bin/sha1sum', dump_file_relative + '.gz'], cwd=safe_join(settings.DUMP_DIR, '.'), stdout=f)
+        p.wait()
+        f.close()
 
         pks = [i[0] for i in qs.values_list('pk')]
         qn = connection.ops.quote_name
