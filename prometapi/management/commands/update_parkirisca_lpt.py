@@ -1,6 +1,6 @@
 
 from django.core.management.base import BaseCommand
-from optparse import make_option
+
 
 class Command(BaseCommand):
 	def handle(self, *args, **options):
@@ -12,5 +12,9 @@ class Command(BaseCommand):
 			json = parse_parkirisca_lpt(*data)
 		except simplejson.decoder.JSONDecodeError:
 			json = None
-		e = ParkiriscaLPT(json_data=_dumps(json), original_data=_dumps(data).encode('zlib').encode('base64'))
+
+		if json is not None:
+			original_data = _dumps(data)
+
+		e = ParkiriscaLPT(json_data=_dumps(json), original_data=original_data)
 		e.save()
