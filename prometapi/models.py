@@ -277,19 +277,15 @@ def fetch(url, postdata=None):
     obfuscated_data = u.read()
     return obfuscated_data
 
-def fetch_promet():
+def fetch_promet(language, contents):
     post = {
-        u'Contents': [
-            {u'ContentName': u'dogodki'},
-            {u'ContentName': u'delo'},
-            {u'ContentName': u'kamere'},
-            {u'ContentName': u'stevci'},
-            {u'ContentName': u'burja'},
-            # {u'ContentName': u'dogodki_a'},
-        ],
-        u'Language': u'sl_SI',
+        u'Contents': [],
+        u'Language': language,
         u'Type': u'www.promet.si',
         u'Version': u'1.0'}
+
+    for name in contents:
+        post['Contents'].append({u'ContentName': name})
 
     d = simplejson.dumps(post, sort_keys=True)
     encrypted = encrypt(d, PROMET_KEY)
