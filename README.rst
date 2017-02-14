@@ -90,6 +90,7 @@ URL: `/promet/bicikelj/list/`_
 Vir podatkov: `Bicikelj.si`_
 
 .. _`/promet/events/`: http://opendata.si/promet/events/
+.. _`/promet/events/?lang=en`: http://opendata.si/promet/events/?lang=en
 .. _`/promet/burja/`: http://opendata.si/promet/burja/
 .. _`/promet/burjaznaki/`: http://opendata.si/promet/burjaznaki/
 .. _`/promet/counters/`: http://opendata.si/promet/counters/
