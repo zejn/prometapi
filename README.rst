@@ -41,6 +41,14 @@ Dogodki na cestah
 
 URL: `/promet/events/`_
 
+URL: `/promet/events/sl_SI/`_
+
+Opisi dogodkov v slovenščini.
+
+URL: `/promet/events/en_US/`_
+
+Opisi dogodkov v angleščini.
+
 Vir podatkov: Direkcija RS za ceste, http://promet.si
 
 

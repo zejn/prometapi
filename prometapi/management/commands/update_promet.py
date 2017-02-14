@@ -7,7 +7,11 @@ class Command(BaseCommand):
 		from prometapi.models import _dumps, fetch_promet, parse_promet, Events, Burja, Cameras, Counters
 		import simplejson
 		
-		data = fetch_promet()
+		data = fetch_promet(
+				language=u"sl_SI",
+				contents=[u'dogodki', u'delo', u'kamere', u'stevci', u'burja']
+			)
+
 		try:
 			full_json = parse_promet(data)
 		except simplejson.decoder.JSONDecodeError:
@@ -28,7 +32,7 @@ class Command(BaseCommand):
 			json_templ = dict([(k, v) for k, v in full_json.items() if k != 'Contents'])
 			json = json_templ.copy()
 			json['Contents'] = dogodki
-			e = Events(json_data=_dumps(json), original_data='')
+			e = Events(json_data=_dumps(json), language=u"sl_SI", original_data='')
 			e.save()
 
 			json = json_templ.copy()
@@ -46,6 +50,17 @@ class Command(BaseCommand):
 			b = Burja(json_data=_dumps(json), original_data='')
 			b.save()
 
-		
 
+		data = fetch_promet(
+				language=u"en_US",
+				contents=[u'dogodki']
+			)
 
+		full_json = parse_promet(data)
+		dogodki = [i for i in full_json['Contents'] if i['ContentName'] == 'dogodki']
+
+		json_templ = dict([(k, v) for k, v in full_json.items() if k != 'Contents'])
+		json = json_templ.copy()
+		json['Contents'] = dogodki
+		e = Events(json_data=_dumps(json), language=u"en_US", original_data='')
+		e.save()
