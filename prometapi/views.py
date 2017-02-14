@@ -10,18 +10,24 @@ from geoprocessing import get_coordtransform
 from django.contrib.gis.geos import GEOSGeometry
 
 
-class List:
+class List(object):
     def __init__(self, model):
         self.model = model
 
     def __call__(self, request):
-        e = self.model.objects.latest('timestamp')
+        return self.resp_latest(self.model.objects)
+
+    def resp_latest(self, objects):
+        e = objects.latest('timestamp')
         resp = HttpResponse(e.json_data, content_type='application/json')
         resp['Access-Control-Allow-Origin'] = '*'
         return resp
 
+class MultilanguageList(List):
+    def __call__(self, request, language='sl_SI'):
+        return self.resp_latest(self.model.objects.filter(language=language))
 
-events = List(Events)
+events = MultilanguageList(Events)
 cameras = List(Cameras)
 burja = List(Burja)
 burjaznaki = List(BurjaZnaki)
