@@ -3,7 +3,7 @@
 import simplejson
 import dicttoxml
 from django.http import HttpResponse
-from prometapi.models import Events, Cameras, Burja, BurjaZnaki, Counters, ParkiriscaLPT
+from prometapi.models import EnEvents, Events, Cameras, Burja, BurjaZnaki, Counters, ParkiriscaLPT
 from prometapi.bicikeljproxy.models import BicikeljData
 from prometapi.sos112.models import SOS112
 from geoprocessing import get_coordtransform
@@ -23,11 +23,18 @@ class List(object):
         resp['Access-Control-Allow-Origin'] = '*'
         return resp
 
-class MultilanguageList(List):
-    def __call__(self, request, language='sl_SI'):
-        return self.resp_latest(self.model.objects.filter(language=language))
 
-events = MultilanguageList(Events)
+class EventsList(List):
+    def __call__(self, request):
+        language = request.GET.get('lang', 'sl')
+        if language.lower() == 'en':
+            model = EnEvents
+        else:
+            model = Events
+        return self.resp_latest(model.objects)
+
+
+events = EventsList(None)
 cameras = List(Cameras)
 burja = List(Burja)
 burjaznaki = List(BurjaZnaki)

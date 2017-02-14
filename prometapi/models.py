@@ -229,7 +229,11 @@ class Events(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
     json_data = models.TextField(null=True, blank=True)
     original_data = models.TextField()
-    language = models.TextField(null=True, blank=True)
+
+class EnEvents(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+    json_data = models.TextField(null=True, blank=True)
+    original_data = models.TextField()
 
 class Cameras(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
