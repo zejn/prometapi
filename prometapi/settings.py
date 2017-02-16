@@ -147,8 +147,7 @@ LOGGING = {
     }
 }
 
-TEST_RUNNER = 'djangocoverage.coverage_test_runner'
-COVERAGE_OMIT_PREFIXES = ['/usr/', '/home/hruske/projekti/djangosrc']
+DUMP_DIR = here('../dumps')
 
 try:
     from djangosecret import SECRET_KEY
