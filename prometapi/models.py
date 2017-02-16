@@ -6,9 +6,9 @@ import simplejson
 import time
 import urllib
 import urllib2
-import lxml.etree
 import subprocess
 from calendar import timegm
+import xml.etree.ElementTree as ET
 
 from django.db import models
 from django.contrib.gis.geos import GEOSGeometry
@@ -464,13 +464,14 @@ def parse_parkirisca_lpt(parkirisca_data, occupancy_data):
     # silly xmlns
     parkirisca_data = parkirisca_data.replace(' xmlns="http://www.tempuri.org/dsP.xsd"', '')
 
-    parkirisca = lxml.etree.fromstring(parkirisca_data)
-    occupancy = lxml.etree.fromstring(occupancy_data)
+    parkirisca = ET.fromstring(parkirisca_data)
+    occupancy = ET.fromstring(occupancy_data)
 
     zattrs = ['ID_ParkiriscaNC', 'Cas', 'P_kratkotrajniki']
     zattrs.sort()
     zasedenost = {}
-    for e in occupancy.xpath('//ROOT/ZASEDENOST'):
+
+    for e in occupancy.findall('./ZASEDENOST'):
         zdict = dict([(i.tag, i.text) for i in e.getchildren()])
         assert list(sorted(zdict.keys())) == zattrs, 'occupancy.xml attributes changed!'
         zdict['Cas_timestamp'] = int(time.mktime(datetime.datetime.strptime(zdict['Cas'], '%Y-%m-%d %H:%M:%S').timetuple()))
@@ -479,13 +480,15 @@ def parse_parkirisca_lpt(parkirisca_data, occupancy_data):
                 zdict[k] = int(v)
         zasedenost[zdict['ID_ParkiriscaNC']] = zdict
 
+    assert len(zasedenost) > 1, 'Ni elementov v occupancy.xml?!'
+
     json = {'Parkirisca': [],}
 
     attrs = ['A_St_Mest', 'Cena_dan_Eur', 'Cena_mesecna_Eur', 'Cena_splosno', 'Cena_ura_Eur', 'ID_Parkirisca', 'ID_ParkiriscaNC', 'Ime', 'Invalidi_St_mest', 'KoordinataX', 'KoordinataY', 'Opis', 'St_mest', 'Tip_parkirisca', 'U_delovnik', 'U_sobota', 'U_splosno', 'Upravljalec']
     attrs.sort()
     geotransform = get_coordtransform()
 
-    for p in parkirisca.xpath('//Parkirisca/Parkirisca'):
+    for p in parkirisca.findall('.//Parkirisca/Parkirisca'):
         pdict = dict([(i.tag, i.text) for i in p.getchildren()])
 
         for k, v in pdict.items():

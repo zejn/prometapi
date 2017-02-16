@@ -1,5 +1,5 @@
 from django.db import models
-import lxml.etree
+import xml.etree.ElementTree as ET
 import datetime
 import time
 import sys
@@ -16,10 +16,10 @@ class BicikeljData(models.Model):
 
 def _parse_main_xml(data):
 	json = {}
-	carto = lxml.etree.fromstring(data)
-	
+	carto = ET.fromstring(data)
+
 	count = 0
-	for marker in carto.xpath('//carto/markers/marker'):
+	for marker in carto.findall('./markers/marker'):
 		assert len(marker.getchildren()) == 0, 'Marker has children!? ' + repr(marker.getchildren())
 		station_id = unicode(marker.attrib['number'])
 		json[station_id] = dict(marker.attrib)
@@ -30,15 +30,15 @@ def _parse_main_xml(data):
 	return json
 
 def _parse_station_xml(data):
-	sta_xml = lxml.etree.fromstring(data)
+	sta_xml = ET.fromstring(data)
+
 	sta_dict = {}
-	for elem in sta_xml.xpath('//station/*'):
+	for elem in sta_xml.findall('./*'):
 		sta_dict[elem.tag] = elem.text
-	assert list(sorted(sta_dict.keys())) == ['available', 'connected', 'free', 'open', 'ticket', 'total', 'updated'], 'Missing or added keys in station XML!?'
+
+	expected_keys = list(sorted(sta_dict.keys()))
+	assert expected_keys == ['available', 'free', 'ticket', 'total'], 'Missing or added keys in station XML!? %r' % expected_keys
 	# backwards compatibility
-	del sta_dict['connected']
-	del sta_dict['open']
-	del sta_dict['updated']
 	return sta_dict
 
 def fetch_xmls():
