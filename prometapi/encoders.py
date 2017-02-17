@@ -2,6 +2,11 @@
 
 import math
 
+try:
+    long_int = long
+except NameError:
+    long_int = int
+
 
 def rshift(val, n):
     if val >= 0:
@@ -74,7 +79,7 @@ def decrypt(e, t):
     g = o[l - 1]
     s = o[0]
     i = 2654435769
-    c = long(math.floor(6 + 52 / l))
+    c = long_int(math.floor(6 + 52 / l))
     u = c * i
     
     while u:

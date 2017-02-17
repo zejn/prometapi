@@ -7,7 +7,16 @@ testfile = lambda x: os.path.join(os.path.dirname(__file__), 'testdata', x)
 obffile = lambda x: testfile(os.path.join('obfuscated', x))
 
 class TestPrometDecoder(unittest.TestCase):
-	def runTest(self):
+	def test_prometsi_decoder(self):
+		data = 'asdfweqweqdfgdg'
+		key = '0' * 16
+		from prometapi.encoders import encrypt, decrypt
+
+		encd = encrypt(data, key)
+		data_back = decrypt(encd, key)
+		self.assertEqual(data, data_back.rstrip('\x00'))
+
+	def test_manythings(self):
 		import codecs
 		from django.test.client import Client
 		from prometapi.models import parse_burja, parse_burjaznaki, parse_counters, parse_events, parse_parkirisca_lpt
