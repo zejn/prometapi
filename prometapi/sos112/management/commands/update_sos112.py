@@ -14,8 +14,8 @@ class Command(BaseCommand):
         
         try:
             json_data = parse_sos112(timestamp, data)
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
             json_data = ''
         
         obj = SOS112(

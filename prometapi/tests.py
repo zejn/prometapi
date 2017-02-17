@@ -1,5 +1,7 @@
 import unittest
 import os
+from prometapi.compat import zlib_encode
+
 
 testfile = lambda x: os.path.join(os.path.dirname(__file__), 'testdata', x)
 obffile = lambda x: testfile(os.path.join('obfuscated', x))
@@ -30,14 +32,15 @@ class TestPrometDecoder(unittest.TestCase):
 				self.assertEqual(type(json), type({}))
 				
 				m = modls[fn]
-				obj = m(json_data=_dumps(json), original_data=obf.encode('zlib').encode('base64'))
+				original_data=zlib_encode(obf)
+				obj = m(json_data=_dumps(json), original_data=original_data)
 				obj.save()
 		
 		# load parkirisca
 		park = open(testfile('parkirisca_1.xml')).read()
 		occu = open(testfile('occupancy_1.xml')).read()
 		json = parse_parkirisca_lpt(park, occu)
-		obj = ParkiriscaLPT(json_data=_dumps(json), original_data=_dumps([park, occu]).encode('zlib').encode('base64'))
+		obj = ParkiriscaLPT(json_data=_dumps(json), original_data=zlib_encode(_dumps([park, occu])))
 		obj.save()
 		
 		# GET

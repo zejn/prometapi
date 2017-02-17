@@ -3,9 +3,10 @@ import xml.etree.ElementTree as ET
 import datetime
 import time
 import sys
-import urllib2
 import foojson
 import json
+from prometapi.compat import urlopen, unicode_type
+
 
 URL_CARTO = 'http://www.bicikelj.si/service/carto'
 URL_STATION = 'http://www.bicikelj.si/service/stationdetails/ljubljana/%s'
@@ -21,7 +22,7 @@ def _parse_main_xml(data):
 	count = 0
 	for marker in carto.findall('./markers/marker'):
 		assert len(marker.getchildren()) == 0, 'Marker has children!? ' + repr(marker.getchildren())
-		station_id = unicode(marker.attrib['number'])
+		station_id = unicode_type(marker.attrib['number'])
 		json[station_id] = dict(marker.attrib)
 	
 		count += 1
@@ -42,11 +43,11 @@ def _parse_station_xml(data):
 	return sta_dict
 
 def fetch_xmls():
-	main_xml = urllib2.urlopen(URL_CARTO, timeout=10).read()
+	main_xml = urlopen(URL_CARTO, timeout=10).read()
 	json = _parse_main_xml(main_xml)
 	
 	for k, v in json.iteritems():
-		sta_xml_data = urllib2.urlopen(URL_STATION % k, timeout=10).read()
+		sta_xml_data = urlopen(URL_STATION % k, timeout=10).read()
 		sta_dict = _parse_station_xml(sta_xml_data)
 		v['station'] = sta_dict
 		v['station_valid'] = not int(sta_dict['total']) == 0
@@ -61,7 +62,7 @@ def fetch_xmls():
 def convert_citybikes(data):
 	try:
 		citybikes = json.loads(data)
-	except ValueError, e:
+	except ValueError as e:
 		print >> sys.stderr, [data]
 		raise
 		

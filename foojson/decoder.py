@@ -3,6 +3,7 @@
 import re
 import sys
 import struct
+import binascii
 
 from foojson.scanner import make_scanner
 c_scanstring = None
@@ -12,7 +13,7 @@ __all__ = ['JSONDecoder']
 FLAGS = re.VERBOSE | re.MULTILINE | re.DOTALL
 
 def _floatconstants():
-    _BYTES = '7FF80000000000007FF0000000000000'.decode('hex')
+    _BYTES = binascii.unhexlify('7FF80000000000007FF0000000000000')
     if sys.byteorder != 'big':
         _BYTES = _BYTES[:8][::-1] + _BYTES[8:][::-1]
     nan, inf = struct.unpack('dd', _BYTES)
@@ -138,8 +139,9 @@ scanstring = py_scanstring
 WHITESPACE = re.compile(r'[ \t\n\r]*', FLAGS)
 WHITESPACE_STR = ' \t\n\r'
 
-def JSONObject((s, end), encoding, strict, scan_once, object_hook, _w=WHITESPACE.match, _ws=WHITESPACE_STR):
+def JSONObject(slice_range, encoding, strict, scan_once, object_hook, _w=WHITESPACE.match, _ws=WHITESPACE_STR):
     pairs = {}
+    (s, end) = slice_range
     # Use a slice to prevent IndexError from being raised, the following
     # check will raise a more specific ValueError if the string is empty
     nextchar = s[end:end + 1]
@@ -214,7 +216,8 @@ def JSONObject((s, end), encoding, strict, scan_once, object_hook, _w=WHITESPACE
         pairs = object_hook(pairs)
     return pairs, end
 
-def JSONArray((s, end), scan_once, _w=WHITESPACE.match, _ws=WHITESPACE_STR):
+def JSONArray(slice_range, scan_once, _w=WHITESPACE.match, _ws=WHITESPACE_STR):
+    (s, end) = slice_range
     values = []
     nextchar = s[end:end + 1]
     if nextchar in _ws:

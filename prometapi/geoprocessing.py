@@ -13,7 +13,7 @@
 #
 # http://www.map-reading.com/ch4-1.php
 
-sl_wkt = '''
+sl_wkt = b'''
 PROJCS["MGI / Slovene National Grid",
 	GEOGCS["MGI",
 		DATUM["Militar_Geographische_Institute",

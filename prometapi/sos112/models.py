@@ -1,7 +1,7 @@
 # coding: utf-8
 import time
-import urllib2
 
+from prometapi.compat import urlopen
 from django.db import models
 from django.contrib.gis.geos import GEOSGeometry
 

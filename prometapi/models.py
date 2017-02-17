@@ -5,7 +5,9 @@ import os
 import simplejson
 import time
 import urllib
-import urllib2
+
+from prometapi.compat import urlopen, unicode_type, unichr_cast
+
 import subprocess
 from calendar import timegm
 import xml.etree.ElementTree as ET
@@ -100,14 +102,14 @@ def deobfuscate(s):
         f(x) = unichr((255 - ord(x)) % 65536)
 
     """
-    assert isinstance(s, unicode), 'Parameter is not unicode.'
+    assert isinstance(s, unicode_type), 'Parameter is not unicode.'
     s2 = s[::2] + s[1::2][::-1]
-    return ''.join((unichr((255 - ord(c)) % 65536) for c in s2))
+    return ''.join((unichr_cast((255 - ord(c)) % 65536) for c in s2))
 
 
 def _decode(s):
     # decode
-    if not isinstance(s, unicode):
+    if not isinstance(s, unicode_type):
         s = s.decode('utf-8')
     return deobfuscate(s)
 
@@ -115,7 +117,7 @@ def datetime_encoder(obj):
     if isinstance(obj, datetime.datetime):
         return obj.isoformat()
     else:
-        raise TypeError, 'Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj))
+        raise TypeError('Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj)))
 
 def dump_data(model, day, use_new=True):
     from django.db import connection
@@ -277,7 +279,7 @@ def fetch(url, postdata=None):
     data = None
     if postdata is not None:
         data = urllib.urlencode(postdata)
-    u = urllib2.urlopen(url, data)
+    u = urlopen(url, data)
     obfuscated_data = u.read()
     return obfuscated_data
 
@@ -294,7 +296,7 @@ def fetch_promet(language, contents):
     d = simplejson.dumps(post, sort_keys=True)
     encrypted = encrypt(d, PROMET_KEY)
     data = encrypted.encode('hex').upper()
-    u = urllib2.urlopen(URL_PROMET, data)
+    u = urlopen(URL_PROMET, data)
     obfuscated_data = u.read()
 
     return obfuscated_data
@@ -476,7 +478,7 @@ def parse_parkirisca_lpt(parkirisca_data, occupancy_data):
         assert list(sorted(zdict.keys())) == zattrs, 'occupancy.xml attributes changed!'
         zdict['Cas_timestamp'] = int(time.mktime(datetime.datetime.strptime(zdict['Cas'], '%Y-%m-%d %H:%M:%S').timetuple()))
         for k, v in zdict.items():
-            if isinstance(v, basestring) and re.match('^\d+$', v):
+            if isinstance(v, str) and re.match('^\d+$', v):
                 zdict[k] = int(v)
         zasedenost[zdict['ID_ParkiriscaNC']] = zdict
 
@@ -525,7 +527,7 @@ def _transform_dataset(original_data):
 
 def fetch_prikljucki():
     url = get_lokacije_url('prikljucki')
-    original_data = urllib2.urlopen(url).read()
+    original_data = urlopen(url).read()
 
     json = {
         'updated': time.time(),
@@ -536,7 +538,7 @@ def fetch_prikljucki():
 
 def fetch_razcepi():
     url = get_lokacije_url('razcepi')
-    original_data = urllib2.urlopen(url).read()
+    original_data = urlopen(url).read()
 
     json = {
         'updated': time.time(),
