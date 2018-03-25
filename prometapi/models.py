@@ -580,7 +580,7 @@ def promet_to_2016_11(jsondata):
 
 def parse_promet(obfuscated_data):
     decoded = _decode(obfuscated_data)
-    json = _loads(decoded)
+    upstream_json = _loads(decoded)
 
     _transform_3787 = get_coordtransform()
     _transform_3912 = find_coordtransform(u'EPSG:3912')
@@ -604,15 +604,12 @@ def parse_promet(obfuscated_data):
         u'EPSG:4326': transform4326,
     }
 
-
+    json = promet_to_2016_11(upstream_json)
 
     for category_obj in json['Contents']:
-        for item in category_obj['Data']['features']:
-            crsid = item.get('crs')['properties']['name']
-            x, y = item['geometry']['coordinates']
-            # x, y = item.get('X'), item.get('Y')
-            item['X'] = x
-            item['Y'] = y
+        for item in category_obj['Data']['Items']:
+            crsid = item.get('CrsId')
+            x, y = item.get('X'), item.get('Y')
             item['x_wgs'], item['y_wgs'] = transforms[crsid](x, y)
 
     now = timegm(datetime.datetime.utcnow().utctimetuple())
