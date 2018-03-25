@@ -396,6 +396,11 @@ def events_to_2016_11(jsondata):
         item['CrsId'] = feat['crs']['properties']['name']
         if feat['geometry']['type'] == 'Point':
             item['X'], item['Y'] = feat['geometry']['coordinates']
+        try:
+            uuid_int = str(uuid.UUID(item['Id']).int)
+            item['Id'] = uuid_int
+        except Exception:
+            pass
         items.append(item)
 
     return new
