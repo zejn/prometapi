@@ -20,12 +20,11 @@ class Command(BaseCommand):
 		dogodki = delo = kamere = stevci = burja = None
 		if full_json:
 			dogodki = [i for i in full_json['Contents'] if i['ContentName'] == 'dogodki']
-			delo = [i for i in full_json['Contents'] if i['ContentName'] == 'delo']
 			kamere = [i for i in full_json['Contents'] if i['ContentName'] == 'kamere']
 			stevci = [i for i in full_json['Contents'] if i['ContentName'] == 'stevci']
 			burja = [i for i in full_json['Contents'] if i['ContentName'] == 'burja']
-			
-		if full_json is None or not all([dogodki, delo, kamere, stevci, burja]):
+
+		if full_json is None or not all([dogodki, kamere, stevci, burja]):
 			e = Events(json_data=_dumps(full_json), original_data=data)
 			e.save()
 		else:

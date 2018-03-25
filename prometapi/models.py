@@ -303,7 +303,6 @@ def fetch_promet(language, contents):
     data = encrypted.encode('hex').upper()
     resp = requests.post(URL_PROMET, data=data)
     obfuscated_data = resp.content
-    print(len(obfuscated_data))
 
     return obfuscated_data
 
