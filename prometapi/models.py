@@ -739,7 +739,7 @@ def parse_parkirisca_lpt(parkirisca_data, occupancy_data):
     attrs.sort()
     geotransform = get_coordtransform()
 
-    for p in parkirisca.findall('.//Parkirisca/Parkirisca'):
+    for p in parkirisca.findall('.//Parkirisca'):
         pdict = dict([(i.tag, i.text) for i in p.getchildren()])
 
         for k, v in pdict.items():
