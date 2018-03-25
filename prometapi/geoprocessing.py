@@ -39,6 +39,7 @@ PROJCS["MGI / Slovene National Grid",
 	AXIS["X",NORTH]]
 '''
 
+
 def get_coordtransform():
 	from django.contrib.gis.gdal.srs import SpatialReference, CoordTransform
 	sl = SpatialReference('EPSG:3787')
@@ -46,3 +47,16 @@ def get_coordtransform():
 	wgs = SpatialReference('EPSG:4326')
 	trans = CoordTransform(sl, wgs)
 	return trans
+
+
+def find_coordtransform(srid):
+	if srid == u'EPSG:3787':
+		return get_coordtransform()
+	elif srid == u'EPSG:3912':
+		from django.contrib.gis.gdal.srs import SpatialReference, CoordTransform
+		sl = SpatialReference('EPSG:3912')
+		wgs = SpatialReference('EPSG:4326')
+		trans = CoordTransform(sl, wgs)
+		return trans
+	else:
+		raise ValueError("Couldn't find transform: %r" % srid)

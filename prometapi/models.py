@@ -2,9 +2,12 @@
 import datetime
 import re
 import os
+import uuid
+
 import simplejson
 import time
 import urllib
+import requests
 
 from prometapi.compat import urlopen, unicode_type, unichr_cast
 
@@ -19,7 +22,7 @@ from django.utils.timezone import make_aware, utc
 from django.conf import settings
 
 from prometapi.encoders import encrypt
-from prometapi.geoprocessing import get_coordtransform
+from prometapi.geoprocessing import get_coordtransform, find_coordtransform
 
 PROMET_KEY = '1234567890123456'
 URL_PROMET = 'http://promet.si/dc/agg'
@@ -288,16 +291,19 @@ def fetch_promet(language, contents):
         u'Contents': [],
         u'Language': language,
         u'Type': u'www.promet.si',
-        u'Version': u'1.0'}
+        u'Version': u'1.0',
+        u'RunId': str(uuid.uuid4())
+    }
 
     for name in contents:
-        post['Contents'].append({u'ContentName': name})
+        post['Contents'].append({u'ContentName': name, u'ModelVersion': 1})
 
     d = simplejson.dumps(post, sort_keys=True)
     encrypted = encrypt(d, PROMET_KEY)
     data = encrypted.encode('hex').upper()
-    u = urlopen(URL_PROMET, data)
-    obfuscated_data = u.read()
+    resp = requests.post(URL_PROMET, data=data)
+    obfuscated_data = resp.content
+    print(len(obfuscated_data))
 
     return obfuscated_data
 
@@ -343,11 +349,241 @@ def _date_to_epoch_matcher(m):
     epoch = datetime.datetime.utcfromtimestamp(0)
     return str(int((date - epoch).total_seconds() * 1000))
 
+
+def events_to_2016_11(jsondata):
+    content_data = {}
+    new = {
+        "ContentName": jsondata["ContentName"],
+        "ModifiedTime": jsondata['ModifiedTime'],
+        "IsModified": jsondata["IsModified"],
+        "Language": jsondata["Language"],
+        "Expires": jsondata['Expires'],
+        "ETag": jsondata["ETag"],
+        "Data": content_data,
+    }
+
+    content_data['ContentName'] = jsondata['Data']['properties']['ContentName']
+    content_data['Language'] = jsondata['Data']['properties']['Language']
+    items = content_data["Items"] = []
+
+    keys = [u'Prioriteta',
+             u'Title',
+             # u'CrsId',
+             u'isMejniPrehod',
+             u'Cesta',
+             u'Updated',
+             u'IconW',
+             u'Description',
+             u'ContentName',
+             u'IsRoadClosed',
+             u'Stacionaza',
+             u'Odsek',
+             u'IconH',
+             u'Icon',
+             u'SmerStacionaza',
+             u'PrioritetaCeste',
+             u'VeljavnostOd',
+             # u'Y',
+             # u'X',
+             u'SideContent',
+             u'Kategorija',
+             u'VeljavnostDo',
+             u'Id']
+
+    for feat in jsondata["Data"]["features"]:
+        item = {}
+        for k in keys:
+            item[k] = feat["properties"][k]
+        item['CrsId'] = feat['crs']['properties']['name']
+        if feat['geometry']['type'] == 'Point':
+            item['X'], item['Y'] = feat['geometry']['coordinates']
+        items.append(item)
+
+    return new
+
+
+def counters_to_2016_11(jsondata):
+    content_data = {}
+    new = {
+        "ContentName": jsondata["ContentName"],
+        "ModifiedTime": jsondata['ModifiedTime'],
+        "IsModified": jsondata["IsModified"],
+        "Language": jsondata["Language"],
+        "Expires": jsondata['Expires'],
+        "ETag": jsondata["ETag"],
+        "Data": content_data,
+    }
+    content_data['ContentName'] = jsondata['Data']['properties']['ContentName']
+    content_data['Language'] = jsondata['Data']['properties']['Language']
+    items = content_data["Items"] = []
+
+    keys = [
+        u'ContentName',
+        u'Description',
+        u'Id',
+        u'stevci_cestaOpis',
+        u'stevci_lokacijaOpis',
+        u'Title',
+    ]
+
+    stevciItems = {}
+
+    for feat in jsondata["Data"]["features"]:
+        stevec_id = feat["properties"]['stevci_lokacija']
+        try:
+            item = stevciItems[stevec_id]
+        except KeyError:
+            item = {}
+            for k in keys:
+                item[k] = feat["properties"][k]
+            item['Icon'] = feat['properties']['GroupIcon']
+            item['Data'] = []
+            item['CrsId'] = feat['crs']['properties']['name']
+            if feat['geometry']['type'] == 'Point':
+                item['X'], item['Y'] = feat['geometry']['coordinates']
+            stevciItems[stevec_id] = item
+            items.append(item)
+
+        stevec_data = {}
+        for k in ['stevci_gap', 'stevci_statOpis', 'stevci_hit', 'stevci_stev', 'stevci_pasOpis', 'stevci_smerOpis', 'stevci_stat']:
+            stevec_data[k] = unicode(feat['properties'][k]).replace('.', ',')
+
+        icon_match = re.match('res/icons/stevci/stevec_(\d+)\.png', feat['properties']['Icon'])
+        icon = ''
+        if icon_match:
+            icon = icon_match.group(1)
+
+        item['Data'].append({
+            'Id': feat['properties']['Id'],
+            'Icon': icon,
+            'properties': stevec_data,
+        })
+
+    return new
+
+
+def burja_to_2016_11(jsondata):
+    content_data = {}
+    new = {
+        "ContentName": jsondata["ContentName"],
+        "ModifiedTime": jsondata['ModifiedTime'],
+        "IsModified": jsondata["IsModified"],
+        "Language": jsondata["Language"],
+        "Expires": jsondata['Expires'],
+        "ETag": jsondata["ETag"],
+        "Data": content_data,
+    }
+    content_data['ContentName'] = jsondata['Data']['properties']['ContentName']
+    content_data['Language'] = jsondata['Data']['properties']['Language']
+    items = content_data["Items"] = []
+
+    keys = [
+        'ContentName',
+        'Description',
+        'Icon',
+        'Id',
+        'sunki',
+        'Title',
+        'veter',
+    ]
+
+    for feat in jsondata["Data"]["features"]:
+        item = {}
+        for k in keys:
+            item[k] = feat["properties"][k]
+        item['CrsId'] = feat['crs']['properties']['name']
+        if feat['geometry']['type'] == 'Point':
+            item['X'], item['Y'] = feat['geometry']['coordinates']
+        items.append(item)
+
+    return new
+
+
+def cameras_to_2016_11(jsondata):
+    content_data = {}
+    new = {
+        "ContentName": jsondata["ContentName"],
+        "ModifiedTime": jsondata['ModifiedTime'],
+        "IsModified": jsondata["IsModified"],
+        "Language": jsondata["Language"],
+        "Expires": jsondata['Expires'],
+        "ETag": jsondata["ETag"],
+        "Data": content_data,
+    }
+    content_data['ContentName'] = jsondata['Data']['properties']['ContentName']
+    content_data['Language'] = jsondata['Data']['properties']['Language']
+    items = content_data["Items"] = []
+
+    keys = [
+        'ContentName',
+        'Icon',
+        'Id',
+        'Title',
+    ]
+
+    cameraGroups = {}
+
+    for feat in jsondata["Data"]["features"]:
+        groupid = feat['properties']['GroupId']
+        try:
+            item = cameraGroups[groupid]
+        except KeyError:
+            item = {}
+            for k in keys:
+                item[k] = feat["properties"][k]
+            item['CrsId'] = feat['crs']['properties']['name']
+            if feat['geometry']['type'] == 'Point':
+                item['X'], item['Y'] = feat['geometry']['coordinates']
+            item['Description'] = feat['properties']['Title']
+            item['Id'] = feat['properties']['Title']
+            item['Kamere'] = []
+            items.append(item)
+            cameraGroups[groupid] = item
+
+        item['Kamere'].append({
+            'Text': feat['properties']['Description'],
+            'Image': feat['properties']['Image'],
+            'Region': feat['properties']['Region'],
+        })
+
+    return new
+
+
+def promet_to_2016_11(jsondata):
+    v201611 = {
+        u'Expires': jsondata[u'Expires'],
+        u'ModelVersion': jsondata[u'ModelVersion'],
+        u'ModifiedTime': jsondata[u'ModifiedTime'],
+        u'RoutingVersion': jsondata[u'RoutingVersion'],
+    }
+    v201611[u'Contents'] = contents = []
+
+    ctransforms = {
+        u'dogodki': events_to_2016_11,
+        u'stevci': counters_to_2016_11,
+        u'burja': burja_to_2016_11,
+        u'kamere': cameras_to_2016_11,
+    }
+
+    for c in jsondata[u'Contents']:
+        typ = c[u'ContentName']
+        try:
+            transformed = ctransforms[typ](c)
+        except KeyError as e:
+            print(e)
+            pass
+        else:
+            contents.append(transformed)
+
+    return v201611
+
+
 def parse_promet(obfuscated_data):
     decoded = _decode(obfuscated_data)
     json = _loads(decoded)
 
     _transform_3787 = get_coordtransform()
+    _transform_3912 = find_coordtransform(u'EPSG:3912')
 
     def transform3787(x, y):
         si_point = GEOSGeometry('SRID=3787;POINT (%s %s)' % (x, y))
@@ -357,14 +593,26 @@ def parse_promet(obfuscated_data):
     def transform4326(x, y):
         return x, y
 
+    def transform3912(x, y):
+        si_point = GEOSGeometry('SRID=3912;POINT (%s %s)' % (x, y))
+        si_point.transform(_transform_3912)
+        return si_point.x, si_point.y
+
     transforms = {
         u'EPSG:2170': transform3787,
+        u'EPSG:3912': transform3912,
         u'EPSG:4326': transform4326,
     }
+
+
+
     for category_obj in json['Contents']:
-        for item in category_obj['Data']['Items']:
-            crsid = item.get('CrsId')
-            x, y = item.get('X'), item.get('Y')
+        for item in category_obj['Data']['features']:
+            crsid = item.get('crs')['properties']['name']
+            x, y = item['geometry']['coordinates']
+            # x, y = item.get('X'), item.get('Y')
+            item['X'] = x
+            item['Y'] = y
             item['x_wgs'], item['y_wgs'] = transforms[crsid](x, y)
 
     now = timegm(datetime.datetime.utcnow().utctimetuple())

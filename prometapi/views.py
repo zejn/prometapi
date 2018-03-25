@@ -1,9 +1,13 @@
 # coding: utf-8
+import urllib
 
 import simplejson
 import dicttoxml
 from django.http import HttpResponse
-from prometapi.models import EnEvents, Events, Cameras, Burja, BurjaZnaki, Counters, ParkiriscaLPT
+from django.shortcuts import render_to_response
+
+from prometapi.models import EnEvents, Events, Cameras, Burja, BurjaZnaki, Counters, ParkiriscaLPT, _loads, \
+    promet_to_2016_11
 from prometapi.bicikeljproxy.models import BicikeljData
 from prometapi.sos112.models import SOS112
 from geoprocessing import get_coordtransform
@@ -103,3 +107,38 @@ def gk_to_wgs84(request):
         'wgs84': transformed,
         'kml': point.kml,
     }
+
+
+def debug_promet(request):
+    from prometapi.encoders import decrypt
+    from prometapi.models import PROMET_KEY
+    import json
+
+    context = {}
+    if request.method == 'POST':
+        encrypted_raw = request.POST.get('encrypted')
+        encrypted = encrypted_raw.strip()
+        if not set(encrypted.upper()) - set('0123456789ABCDEF'):
+            print("hex decoding")
+            encrypted = encrypted.decode('hex')
+
+        print([encrypted])
+        decoded = decrypt(encrypted, PROMET_KEY)
+        decoded = urllib.unquote(decoded)
+        decoded = decoded.rstrip('\x00')
+        j = _loads(decoded)
+        decoded = json.dumps(j, sort_keys=True, indent=4)
+        print([decoded])
+        context['encrypted'] = encrypted_raw
+        context['decoded'] = decoded
+    return render_to_response("debug_promet.html", context=context)
+
+
+@jsonresponse
+def debug_compat(request):
+    import json
+
+    with open('testdata/structure-2018-03.json') as f:
+        data = json.load(f)
+
+    return promet_to_2016_11(data)

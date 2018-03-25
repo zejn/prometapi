@@ -1,0 +1,21 @@
+<html>
+<head><title>Debug Promet</title>
+</head>
+<body>
+<h4>Debug Promet</h4>
+
+<form method="post" action="/debug/promet/">
+    <textarea name="encrypted" rows="10" cols="80">{{ encrypted }}</textarea>
+    <p>
+        <input type="submit" />
+    </p>
+</form>
+
+<div id="decoded">
+<pre>
+{{ decoded }}
+</pre>
+</div>
+
+</body>
+</html>

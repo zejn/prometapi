@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import url
 from django.views.generic.base import RedirectView
 from prometapi import views
@@ -27,3 +28,9 @@ urlpatterns = [
     url(r'^promet/gk_to_wgs84/', views.gk_to_wgs84),
     url(r'^sos112/spin/', views.sos112),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^debug/promet/', views.debug_promet),
+        url(r'^debug/compat/', views.debug_compat)
+    ]
