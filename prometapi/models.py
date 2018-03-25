@@ -546,7 +546,7 @@ def cameras_to_2016_11(jsondata):
 
         item['Kamere'].append({
             'Text': feat['properties']['Description'],
-            'Image': feat['properties']['Image'],
+            'Image': feat['properties']['Image'].strip(),
             'Region': feat['properties']['Region'],
         })
 
